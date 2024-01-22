@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:kafil_task/core/helpers/spacing.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kafil_task/core/theming/colors.dart';
 import 'package:kafil_task/core/theming/text_styles.dart';
 
 class RememberMeAndForgetPassword extends StatelessWidget {
@@ -7,13 +8,16 @@ class RememberMeAndForgetPassword extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool rememberMe = true;
+    bool rememberMe = false;
     return Row(
       children: [
         StatefulBuilder(
-          builder:
-              (BuildContext context, void Function(void Function()) setState) {
+          builder: (BuildContext context, void Function(void Function()) setState) {
             return Checkbox(
+                activeColor: ColorsManager.mainGreen,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(2.r),
+                ),
                 value: rememberMe,
                 onChanged: (value) {
                   setState(() {
@@ -22,7 +26,6 @@ class RememberMeAndForgetPassword extends StatelessWidget {
                 });
           },
         ),
-        horizontalSpace(10),
         Text(
           "Remember me",
           style: TextStyles.font12GrayW500,

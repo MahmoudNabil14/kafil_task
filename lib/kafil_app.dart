@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kafil_task/core/routing/app_router.dart';
 import 'package:kafil_task/core/routing/routes.dart';
+import 'package:kafil_task/core/theming/themes/light_theme.dart';
 
 class KafilApp extends StatelessWidget {
   final AppRouter appRouter;
@@ -15,10 +16,7 @@ class KafilApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Kafil Task',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-        ),
+        theme: lightTheme,
         initialRoute: Routes.loginScreen,
         onGenerateRoute: appRouter.generateRoute,
         
