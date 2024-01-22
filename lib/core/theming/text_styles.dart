@@ -28,4 +28,9 @@ class TextStyles {
     fontWeight: FontWeight.w600,
     color: ColorsManager.mainGreen
   );
+  static TextStyle font16DarkGrayW500 = TextStyle(
+    fontSize: 16.sp,
+    fontWeight: FontWeight.w500,
+    color: ColorsManager.darkGray
+  );
 }
