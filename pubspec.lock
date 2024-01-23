@@ -196,10 +196,11 @@ packages:
   dashed_stepper:
     dependency: "direct main"
     description:
-      name: dashed_stepper
-      sha256: "7d3afecaa84ca99173fc88d920ad369f8dc304ed4e4cc5ac281d57c29ad2a222"
-      url: "https://pub.dev"
-    source: hosted
+      path: "."
+      ref: HEAD
+      resolved-ref: "08cfcfaf92334188542ad6c844cb2e9d8156347a"
+      url: "https://github.com/MahmoudNabil14/custom_stepper"
+    source: git
     version: "0.0.4"
   dio:
     dependency: "direct main"

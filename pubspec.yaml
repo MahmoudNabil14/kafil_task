@@ -36,7 +36,9 @@ dependencies:
   flutter_screenutil: ^5.9.0
   #for custom register screen stepper
   easy_stepper: ^0.8.3
-  dashed_stepper: ^0.0.4
+  dashed_stepper:
+    git:
+      url: "https://github.com/MahmoudNabil14/custom_stepper"
 
 dev_dependencies:
   flutter_test:

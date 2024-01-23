@@ -37,4 +37,5 @@ class TextStyles {
     fontWeight: FontWeight.w500,
     color: ColorsManager.black
   );
+  static TextStyle font12mainGreenW600 = TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w600, color: ColorsManager.mainGreen);
 }
