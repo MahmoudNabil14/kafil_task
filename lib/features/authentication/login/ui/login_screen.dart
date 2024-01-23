@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kafil_task/core/helpers/spacing.dart';
 import 'package:kafil_task/core/shared_widgets/app_text_button.dart';
 import 'package:kafil_task/core/shared_widgets/screen_title_and_back_button.dart';
+import 'package:kafil_task/core/theming/text_styles.dart';
 import 'package:kafil_task/features/authentication/login/logic/login_cubit.dart';
 import 'package:kafil_task/features/authentication/login/ui/widgets/dont_have_an_account_widget.dart';
 import 'package:kafil_task/features/authentication/login/ui/widgets/email_and_password.dart';
@@ -19,12 +21,13 @@ class LoginScreen extends StatelessWidget {
       resizeToAvoidBottomInset: true,
       body: SafeArea(
           child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30.0),
+        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 30.h),
         child: Column(
           children: [
-            const ScreenTitleAndBackButton(
-              screenTitle: "Account Login",
-            ),
+            Align(
+              alignment: AlignmentDirectional.centerStart,
+                child:
+                    Text("Account Login", style: TextStyles.font18BlackW600)),
             verticalSpace(30),
             Expanded(
               child: SingleChildScrollView(

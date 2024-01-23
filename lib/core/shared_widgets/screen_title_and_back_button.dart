@@ -13,11 +13,11 @@ class ScreenTitleAndBackButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        IconButton(
-          onPressed: (){
+        InkWell(
+          onTap: (){
             context.pop();
           },
-          icon: const Icon(
+          child: const Icon(
             Icons.arrow_back_ios,
             color: ColorsManager.black,
           ),

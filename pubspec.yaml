@@ -34,6 +34,9 @@ dependencies:
   flutter_svg: ^2.0.9
   # for adapting screen and font size.
   flutter_screenutil: ^5.9.0
+  #for custom register screen stepper
+  easy_stepper: ^0.8.3
+  dashed_stepper: ^0.0.4
 
 dev_dependencies:
   flutter_test:

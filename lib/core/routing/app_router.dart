@@ -4,6 +4,7 @@ import 'package:kafil_task/core/di/dependency_injection.dart';
 import 'package:kafil_task/core/routing/routes.dart';
 import 'package:kafil_task/features/authentication/login/logic/login_cubit.dart';
 import 'package:kafil_task/features/authentication/login/ui/login_screen.dart';
+import 'package:kafil_task/features/authentication/register/ui/register_screen.dart';
 import 'package:kafil_task/features/home/ui/home_screen.dart';
 
 class AppRouter {
@@ -19,13 +20,10 @@ class AppRouter {
           },
           child: const LoginScreen(),),
         );
-      // case Routes.signUpScreen:
-      //   return MaterialPageRoute(
-      //     builder: (_) => BlocProvider(
-      //       create: (context) => getIt<SignupCubit>(),
-      //       child: const SignupScreen(),
-      //     ),
-      //   );
+      case Routes.registerScreen:
+        return MaterialPageRoute(
+          builder: (_) => const RegisterScreen(),
+        );
       case Routes.homeScreen:
         return MaterialPageRoute(
           builder: (_) => const HomeScreen(),
