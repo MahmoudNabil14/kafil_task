@@ -13,6 +13,11 @@ class TextStyles {
     fontWeight: FontWeight.w500,
     color: ColorsManager.gray
   );
+  static TextStyle font12lighterGrayW500 = TextStyle(
+    fontSize: 12.sp,
+    fontWeight: FontWeight.w500,
+    color: ColorsManager.lighterGray
+  );
   static TextStyle font14WhiteW500 = TextStyle(
     fontSize: 14.sp,
     fontWeight: FontWeight.w500,
@@ -37,5 +42,12 @@ class TextStyles {
     fontWeight: FontWeight.w500,
     color: ColorsManager.black
   );
-  static TextStyle font12mainGreenW600 = TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w600, color: ColorsManager.mainGreen);
+  static TextStyle font12mainGreenW600 = TextStyle(
+      fontSize: 12.sp,
+      fontWeight: FontWeight.w600,
+      color: ColorsManager.mainGreen);
+  static TextStyle font12lighterOrangeW500 = TextStyle(
+      fontSize: 12.sp,
+      fontWeight: FontWeight.w500,
+      color: ColorsManager.lighterOrange);
 }
