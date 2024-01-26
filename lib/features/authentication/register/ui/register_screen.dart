@@ -1,16 +1,17 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:kafil_task/core/helpers/extensions.dart';
 import 'package:kafil_task/core/helpers/spacing.dart';
-import 'package:kafil_task/core/routing/routes.dart';
 import 'package:kafil_task/core/shared_widgets/app_text_button.dart';
 import 'package:kafil_task/core/shared_widgets/screen_title_and_back_button.dart';
+import 'package:kafil_task/features/authentication/register/data/models/register_request_body.dart';
 import 'package:kafil_task/features/authentication/register/logic/register_cubit.dart';
 import 'package:kafil_task/features/authentication/register/ui/widgets/app_dependencies_bloc_listener.dart';
 import 'package:kafil_task/features/authentication/register/ui/widgets/complete_data_form.dart';
 import 'package:kafil_task/features/authentication/register/ui/widgets/custom_stepper.dart';
 import 'package:kafil_task/features/authentication/register/ui/widgets/form_validation_failed_text.dart';
+import 'package:kafil_task/features/authentication/register/ui/widgets/register_bloc_listener.dart';
 import 'package:kafil_task/features/authentication/register/ui/widgets/register_form.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -27,7 +28,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -39,7 +39,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      if (registerFormValidationFailed) const FormValidationFailedText(),
+                      if ((currentStep == 1 && registerFormValidationFailed) || currentStep == 2 && completeDataFormValidationFailed)
+                        const FormValidationFailedText(),
                       CustomStepper(currentStep: currentStep),
                       verticalSpace(20),
                       if (currentStep == 1) const RegisterForm() else const CompleteDataForm(),
@@ -68,14 +69,34 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           alignment: AlignmentDirectional.centerEnd,
                           child: AppTextButton(
                             buttonText: "Submit",
-                            onPressed: () {
-                              if (context.read<RegisterCubit>().completeDataFormKey.currentState!.validate()) {
+                            onPressed: () async {
+                              if (context.read<RegisterCubit>().completeDataFormKey.currentState!.validate() &&
+                                  context.read<RegisterCubit>().selectedAvatar != null &&
+                                  context.read<RegisterCubit>().selectedGender != null &&
+                                  context.read<RegisterCubit>().favoriteSocialMedia.isNotEmpty) {
                                 setState(() {
                                   completeDataFormValidationFailed = false;
-                                  context.pushNamedAndRemoveUntil(
-                                    Routes.homeScreen,
-                                    predicate: (Route<dynamic> route) => false,
-                                  );
+                                });
+
+                                await MultipartFile.fromFile(
+                                  context.read<RegisterCubit>().selectedAvatar!.path, // Replace with the actual file path
+                                  filename: 'avatar',
+                                ).then((selectedAvatar) {
+                                  RegisterRequestBody registerRequestBody = RegisterRequestBody(
+                                      firstName: context.read<RegisterCubit>().firstNameController.text,
+                                      lastName: context.read<RegisterCubit>().lastNameController.text,
+                                      email: context.read<RegisterCubit>().emailController.text,
+                                      password: context.read<RegisterCubit>().passwordController.text,
+                                      confirmPassword: context.read<RegisterCubit>().confirmPasswordController.text,
+                                      userType: context.read<RegisterCubit>().selectedType.id,
+                                      about: context.read<RegisterCubit>().aboutController.text,
+                                      brithDate: context.read<RegisterCubit>().birthDateController.text,
+                                      gender: context.read<RegisterCubit>().selectedGender!,
+                                      salary: context.read<RegisterCubit>().salary,
+                                      tags: [1,2],
+                                      avatar: context.read<RegisterCubit>().selectedAvatar,
+                                      favoriteSocialMedia: context.read<RegisterCubit>().favoriteSocialMedia);
+                                  context.read<RegisterCubit>().emitRegisterStates(registerRequestBody: registerRequestBody);
                                 });
                               } else {
                                 setState(() {
@@ -85,7 +106,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             },
                           ),
                         ),
-                      const AppDependenciesBlocListener()
+                      const AppDependenciesBlocListener(),
+                      const RegisterBlocListener(),
                     ],
                   ),
                 ),

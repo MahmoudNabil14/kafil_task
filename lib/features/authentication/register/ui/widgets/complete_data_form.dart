@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:kafil_task/core/di/dependency_injection.dart';
 import 'package:kafil_task/core/helpers/app_regex.dart';
 import 'package:kafil_task/core/helpers/extensions.dart';
 import 'package:kafil_task/core/helpers/spacing.dart';
@@ -140,7 +141,11 @@ class FavoriteSocialMedia extends StatelessWidget {
                     borderRadius: BorderRadius.circular(3.r),
                   ),
                 ),
-                SvgPicture.asset("assets/svgs/facebook.svg",height: 22.h,width:22.w,),
+                SvgPicture.asset(
+                  "assets/svgs/facebook.svg",
+                  height: 22.h,
+                  width: 22.w,
+                ),
                 horizontalSpace(10),
                 Text(
                   "Facebook",
@@ -169,7 +174,11 @@ class FavoriteSocialMedia extends StatelessWidget {
                     borderRadius: BorderRadius.circular(3.r),
                   ),
                 ),
-                SvgPicture.asset("assets/svgs/twitter.svg",height: 22.h,width:22.w,),
+                SvgPicture.asset(
+                  "assets/svgs/twitter.svg",
+                  height: 22.h,
+                  width: 22.w,
+                ),
                 horizontalSpace(10),
                 Text(
                   "Twitter",
@@ -198,9 +207,12 @@ class FavoriteSocialMedia extends StatelessWidget {
                     borderRadius: BorderRadius.circular(3.r),
                   ),
                 ),
-                SvgPicture.asset("assets/svgs/instagram.svg",height: 22.h,width:22.w,),
+                SvgPicture.asset(
+                  "assets/svgs/instagram.svg",
+                  height: 22.h,
+                  width: 22.w,
+                ),
                 horizontalSpace(10),
-
                 Text(
                   "Instagram",
                   style: TextStyles.font14BlackW500,
@@ -411,7 +423,6 @@ class ProfileAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    File? pickedImage;
     return StatefulBuilder(
       builder: (BuildContext context, void Function(void Function()) setState) {
         return Stack(
@@ -422,8 +433,8 @@ class ProfileAvatar extends StatelessWidget {
               backgroundColor: ColorsManager.mainGreen,
               child: CircleAvatar(
                 radius: 52.r,
-                backgroundImage: pickedImage != null
-                    ? FileImage(pickedImage!)
+                backgroundImage: context.read<RegisterCubit>().selectedAvatar != null
+                    ? FileImage(context.read<RegisterCubit>().selectedAvatar!)
                     : const NetworkImage(
                             "https://img.freepik.com/free-photo/waist-up-portrait-handsome-serious-unshaven-male-keeps-hands-together-dressed-dark-blue-shirt-has-talk-with-interlocutor-stands-against-white-wall-self-confident-man-freelancer_273609-16320.jpg?w=1380&t=st=1706140634~exp=1706141234~hmac=d738b3859e6cbdd9196a7e5487ed501339b0a5c217d9e665ae4fe1fa0ea4c4b2")
                         as ImageProvider,
@@ -436,83 +447,89 @@ class ProfileAvatar extends StatelessWidget {
                 onPressed: () {
                   showDialog(
                     context: context,
-                    builder: (context) {
-                      return AlertDialog(
-                        contentPadding: EdgeInsets.all(25.sp),
-                        content: SizedBox(
-                          height: 140.h,
-                          width: context.screenWidth,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Column(
-                                children: [
-                                  GestureDetector(
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        color: ColorsManager.lightestGray,
-                                        borderRadius: BorderRadius.circular(15.r),
+                    builder: (builderContext) {
+                      return BlocProvider<RegisterCubit>(
+                        create: (context) => getIt<RegisterCubit>(),
+                        child: AlertDialog(
+                          contentPadding: EdgeInsets.all(25.sp),
+                          content: SizedBox(
+                            height: 140.h,
+                            width: context.screenWidth,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Column(
+                                  children: [
+                                    GestureDetector(
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          color: ColorsManager.lightestGray,
+                                          borderRadius: BorderRadius.circular(15.r),
+                                        ),
+                                        height: 100.h,
+                                        width: 100.w,
+                                        child: Icon(
+                                          Icons.camera_alt_outlined,
+                                          color: ColorsManager.mainGreen,
+                                          size: 60.sp,
+                                        ),
                                       ),
-                                      height: 100.h,
-                                      width: 100.w,
-                                      child: Icon(
-                                        Icons.camera_alt_outlined,
-                                        color: ColorsManager.mainGreen,
-                                        size: 60.sp,
-                                      ),
-                                    ),
-                                    onTap: () async {
-                                      final XFile? image = await picker.pickImage(source: ImageSource.camera);
-                                      if (image != null) {
-                                        setState(() {
-                                          pickedImage = File(image.path);
-                                          context.pop();
+                                      onTap: () async {
+                                        await picker.pickImage(source: ImageSource.camera).then((image) {
+                                          if (image != null) {
+                                            context.read<RegisterCubit>().selectedAvatar = File(image.path);
+                                            setState(() {
+                                              context.pop();
+                                            });
+                                          }
                                         });
-                                      }
-                                    },
-                                  ),
-                                  verticalSpace(10),
-                                  Text(
-                                    "Camera",
-                                    style: TextStyles.font14BlackW500,
-                                  )
-                                ],
-                              ),
-                              horizontalSpace(20),
-                              Column(
-                                children: [
-                                  GestureDetector(
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        color: ColorsManager.lightestGray,
-                                        borderRadius: BorderRadius.circular(15.r),
-                                      ),
-                                      height: 100.h,
-                                      width: 100.w,
-                                      child: Icon(
-                                        Icons.photo,
-                                        color: ColorsManager.mainGreen,
-                                        size: 60.sp,
-                                      ),
+
+                                      },
                                     ),
-                                    onTap: () async {
-                                      final XFile? image = await picker.pickImage(source: ImageSource.gallery);
-                                      if (image != null) {
-                                        setState(() {
-                                          pickedImage = File(image.path);
-                                          context.pop();
+                                    verticalSpace(10),
+                                    Text(
+                                      "Camera",
+                                      style: TextStyles.font14BlackW500,
+                                    )
+                                  ],
+                                ),
+                                horizontalSpace(20),
+                                Column(
+                                  children: [
+                                    GestureDetector(
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          color: ColorsManager.lightestGray,
+                                          borderRadius: BorderRadius.circular(15.r),
+                                        ),
+                                        height: 100.h,
+                                        width: 100.w,
+                                        child: Icon(
+                                          Icons.photo,
+                                          color: ColorsManager.mainGreen,
+                                          size: 60.sp,
+                                        ),
+                                      ),
+                                      onTap: () async {
+                                        await picker.pickImage(source: ImageSource.gallery).then((image) {
+                                          if (image != null) {
+                                            context.read<RegisterCubit>().selectedAvatar = File(image.path);
+                                            setState(() {
+                                              context.pop();
+                                            });
+                                          }
                                         });
-                                      }
-                                    },
-                                  ),
-                                  verticalSpace(10),
-                                  Text(
-                                    "Gallery",
-                                    style: TextStyles.font14BlackW500,
-                                  )
-                                ],
-                              ),
-                            ],
+                                      },
+                                    ),
+                                    verticalSpace(10),
+                                    Text(
+                                      "Gallery",
+                                      style: TextStyles.font14BlackW500,
+                                    )
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       );

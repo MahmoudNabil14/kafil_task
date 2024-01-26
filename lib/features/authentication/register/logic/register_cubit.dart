@@ -1,8 +1,9 @@
+import 'dart:io';
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kafil_task/features/authentication/register/data/models/register_request_body.dart';
 import 'package:kafil_task/features/authentication/register/data/repo/register_repo.dart';
-
 import 'register_state.dart';
 
 class RegisterCubit extends Cubit<RegisterState> {
@@ -35,12 +36,13 @@ class RegisterCubit extends Cubit<RegisterState> {
   int salary = 100;
   //gender can be 0-1-null
   int? selectedGender;
+  File? selectedAvatar;
   List<num> tags = [];
   List<String> favoriteSocialMedia = [];
 
   void emitRegisterStates({required RegisterRequestBody registerRequestBody}) async {
     emit(const RegisterState.loading());
-    final response = await _registerRepo.register(registerRequestBody: registerRequestBody);
+    final response = await _registerRepo.register(registerRequestBody: registerRequestBody, avatar: await MultipartFile.fromFile(selectedAvatar!.path));
     response.when(success: (registerResponse) {
       emit(RegisterState.success(registerResponse));
     }, failure: (error) {

@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:kafil_task/core/networking/api_error_handler.dart';
 import 'package:kafil_task/core/networking/api_result.dart';
 import 'package:kafil_task/core/networking/api_service.dart';
@@ -9,7 +10,7 @@ class RegisterRepo{
 
   RegisterRepo(this._apiService);
 
-  Future<ApiResult<RegisterResponse>> register({required RegisterRequestBody registerRequestBody})async{
+  Future<ApiResult<RegisterResponse>> register({required RegisterRequestBody registerRequestBody, required MultipartFile avatar})async{
     final response = await _apiService.register(registerRequestBody);
     try{
       return ApiResult.success(response);

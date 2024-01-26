@@ -14,6 +14,6 @@ class AppRegex {
     return RegExp(r'^.{1,50}$').hasMatch(name);
   }
   static bool isAboutValid(String name) {
-    return RegExp(r'^.{10,1000}$').hasMatch(name);
+    return RegExp(r'^.{10,1000}$',multiLine: true).hasMatch(name);
   }
 }

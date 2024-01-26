@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:kafil_task/core/helpers/constants.dart';
+import 'package:kafil_task/core/app_dependecies/logic/app_dependencies_cubit.dart';
+import 'package:kafil_task/core/app_dependecies/logic/app_dependencies_state.dart';
 import 'package:kafil_task/core/helpers/extensions.dart';
-import 'package:kafil_task/core/helpers/secure_cache_service.dart';
 import 'package:kafil_task/core/routing/routes.dart';
 import 'package:kafil_task/core/theming/colors.dart';
 import 'package:kafil_task/core/theming/text_styles.dart';
-import 'package:kafil_task/features/authentication/login/data/models/login_response.dart';
-import 'package:kafil_task/features/authentication/login/logic/login_cubit.dart';
-import 'package:kafil_task/features/authentication/login/logic/login_state.dart';
+import 'package:kafil_task/features/authentication/register/logic/register_cubit.dart';
+import 'package:kafil_task/features/authentication/register/logic/register_state.dart';
 
-class LoginBlocListener extends StatelessWidget {
-  const LoginBlocListener({super.key});
+class RegisterBlocListener extends StatelessWidget {
+  const RegisterBlocListener({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<LoginCubit, LoginState>(
+    return BlocListener<RegisterCubit, RegisterState>(
       listener: (context, state) {
         state.whenOrNull(loading: () {
           showDialog(
@@ -27,10 +26,8 @@ class LoginBlocListener extends StatelessWidget {
             ),
           );
         }, success: (loginResponse) {
-          userAccessToken = (loginResponse as LoginResponse).accessToken;
-          SecureCacheService.saveData(key: "userAccessToken", value: userAccessToken);
-          context.pop();
-          context.pushNamedAndRemoveUntil(Routes.appLayout, predicate: (Route<dynamic> route) { return false; });
+          context.pushNamedAndRemoveUntil(Routes.loginScreen, predicate: (Route<dynamic> route)=>false);
+          // context.pop();
         }, error: (error) {
           setupErrorState(context, error);
         });
