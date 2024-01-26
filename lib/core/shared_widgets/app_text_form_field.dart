@@ -18,6 +18,7 @@ class AppTextFormField extends StatelessWidget {
   final int? minLines;
   final int? maxLength;
   final bool readOnly;
+  final String? initialText;
   final TextInputAction textInputAction;
   final TextEditingController? controller;
   final Function(String?) validator;
@@ -34,6 +35,7 @@ class AppTextFormField extends StatelessWidget {
     this.suffixIcon,
     this.backgroundColor,
     this.controller,
+    this.initialText ,
     required this.validator,
     required this.labelText,
     this.readOnly = false,
@@ -52,6 +54,7 @@ class AppTextFormField extends StatelessWidget {
         ),
         verticalSpace(10),
         TextFormField(
+          initialValue: initialText,
           minLines: minLines??1,
           maxLines: minLines??1,
           maxLength: maxLength,

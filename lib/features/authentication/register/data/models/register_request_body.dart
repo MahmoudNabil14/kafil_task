@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:dio/dio.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'register_request_body.g.dart';
 
@@ -13,13 +16,13 @@ class RegisterRequestBody {
   final String confirmPassword;
   @JsonKey(name: "type")
   final int userType;
-  @JsonKey(name: "avatar")
-  final String avatarAsBytes;
   final String about;
   @JsonKey(name: "birth_date")
   final String brithDate;
   final int gender;
   final int salary;
+  @JsonKey(includeFromJson: false)
+  final File? avatar;
   final List<int> tags;
   @JsonKey(name: "favorite_social_media")
   final List<String> favoriteSocialMedia;
@@ -31,8 +34,8 @@ class RegisterRequestBody {
       required this.password,
       required this.confirmPassword,
       required this.userType,
-      required this.avatarAsBytes,
       required this.about,
+        this.avatar,
       required this.brithDate,
       required this.gender,
       required this.salary,
@@ -40,5 +43,6 @@ class RegisterRequestBody {
       required this.favoriteSocialMedia});
 
   Map<String, dynamic> toJson()=>_$RegisterRequestBodyToJson(this);
+
 
 }

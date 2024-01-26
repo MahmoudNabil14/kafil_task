@@ -9,6 +9,8 @@ import 'package:kafil_task/features/authentication/login/data/repos/login_repo.d
 import 'package:kafil_task/features/authentication/login/logic/login_cubit.dart';
 import 'package:kafil_task/features/authentication/register/data/repo/register_repo.dart';
 import 'package:kafil_task/features/authentication/register/logic/register_cubit.dart';
+import 'package:kafil_task/features/who_am_i/data/repo/who_am_i_repo.dart';
+import 'package:kafil_task/features/who_am_i/logic/who_am_i_cubit.dart';
 
 final getIt = GetIt.instance;
 
@@ -28,6 +30,10 @@ Future<void> setupGetIt() async {
   getIt.registerLazySingleton<RegisterRepo>(() => RegisterRepo(getIt()));
   getIt.registerLazySingleton<RegisterCubit>(() => RegisterCubit(getIt()));
 
-  //register
+  //who am i
+  getIt.registerLazySingleton<WhoAmIRepo>(() => WhoAmIRepo(getIt()));
+  getIt.registerLazySingleton<WhoAmICubit>(() => WhoAmICubit(getIt()));
+
+  //app layout
   getIt.registerLazySingleton<AppLayoutCubit>(() => AppLayoutCubit());
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kafil_task/core/app_dependecies/logic/app_dependencies_cubit.dart';
 import 'package:kafil_task/core/di/dependency_injection.dart';
+import 'package:kafil_task/core/helpers/constants.dart';
 import 'package:kafil_task/core/routing/routes.dart';
 import 'package:kafil_task/features/app_layout/logic/app_layout_cubit.dart';
 import 'package:kafil_task/features/app_layout/ui/app_layout.dart';
@@ -17,8 +18,13 @@ class AppRouter {
     final arguments = settings.arguments;
 
     switch (settings.name) {
-      case Routes.loginScreen:
-        return MaterialPageRoute(
+      case Routes.initialRoute:
+        return userAccessToken!=null ?MaterialPageRoute(
+          builder: (_) => BlocProvider<AppLayoutCubit>(create: (BuildContext context) {
+            return getIt<AppLayoutCubit>();
+          },
+              child: const AppLayout()),
+        ):MaterialPageRoute(
           builder: (_) => BlocProvider<LoginCubit>(
             create: (BuildContext context) {
               return getIt<LoginCubit>();
@@ -44,7 +50,7 @@ class AppRouter {
             child: const RegisterScreen(),
           ),
         );
-      case Routes.homeScreen:
+      case Routes.appLayout:
         return MaterialPageRoute(
           builder: (_) => BlocProvider<AppLayoutCubit>(create: (BuildContext context) {
             return getIt<AppLayoutCubit>();

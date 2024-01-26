@@ -53,7 +53,12 @@ class _ApiService implements ApiService {
       RegisterRequestBody registerRequestBody) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
+    final _headers = <String, dynamic>{
+      r'Accept': 'application/json',
+      r'Accept-Language': 'ar',
+      r'Content-Type': 'multipart/form-data',
+    };
+    _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     _data.addAll(registerRequestBody.toJson());
     final _result = await _dio
@@ -61,6 +66,7 @@ class _ApiService implements ApiService {
       method: 'POST',
       headers: _headers,
       extra: _extra,
+      contentType: 'multipart/form-data',
     )
             .compose(
               _dio.options,
@@ -101,6 +107,33 @@ class _ApiService implements ApiService {
               baseUrl,
             ))));
     final value = AppDependenciesResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<WhoAmIResponse> whoAmI() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<WhoAmIResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'api/test/user/who-am-i',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = WhoAmIResponse.fromJson(_result.data!);
     return value;
   }
 
