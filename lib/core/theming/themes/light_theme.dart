@@ -6,4 +6,5 @@ ThemeData lightTheme = ThemeData(
   colorScheme: ColorScheme.fromSeed(seedColor: ColorsManager.mainGreen),
   useMaterial3: true,
   scaffoldBackgroundColor: Colors.white,
+
 );

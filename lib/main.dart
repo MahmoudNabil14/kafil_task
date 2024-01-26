@@ -10,7 +10,7 @@ void main() async {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarBrightness: Brightness.light,
     statusBarIconBrightness: Brightness.dark,
-    statusBarColor: Colors.white,
+    statusBarColor: Colors.transparent,
   ));
   setupGetIt();
   runApp(KafilApp(

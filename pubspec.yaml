@@ -38,6 +38,10 @@ dependencies:
   dashed_stepper:
     git:
       url: "https://github.com/MahmoudNabil14/custom_stepper"
+  #for selecting images from the Android and iOS image library, and taking new pictures with the camera.
+  image_picker: ^1.0.7
+  #for dealing with internationalized/localized messages, date and number formatting and parsing, bi-directional text.
+  intl: ^0.19.0
 
 dev_dependencies:
   flutter_test:

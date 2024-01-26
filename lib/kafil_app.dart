@@ -17,7 +17,7 @@ class KafilApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Kafil Task',
         theme: lightTheme,
-        initialRoute: Routes.registerScreen,
+        initialRoute: Routes.homeScreen,
         onGenerateRoute: appRouter.generateRoute,
         
       ),
