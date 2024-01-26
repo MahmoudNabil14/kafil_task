@@ -34,6 +34,14 @@ dependencies:
   flutter_svg: ^2.0.9
   # for adapting screen and font size.
   flutter_screenutil: ^5.9.0
+  #for custom register screen stepper
+  dashed_stepper:
+    git:
+      url: "https://github.com/MahmoudNabil14/custom_stepper"
+  #for selecting images from the Android and iOS image library, and taking new pictures with the camera.
+  image_picker: ^1.0.7
+  #for dealing with internationalized/localized messages, date and number formatting and parsing, bi-directional text.
+  intl: ^0.19.0
 
 dev_dependencies:
   flutter_test:
@@ -48,28 +56,24 @@ flutter:
     - assets/images/
     - assets/svgs/
 
-  # An image asset can refer to one or more resolution-specific "variants", see
-  # https://flutter.dev/assets-and-images/#resolution-aware
-
-  # For details regarding adding assets from package dependencies, see
-  # https://flutter.dev/assets-and-images/#from-packages
-
-  # To add custom fonts to your application, add a fonts section here,
-  # in this "flutter" section. Each entry in this list should have a
-  # "family" key with the font family name, and a "fonts" key with a
-  # list giving the asset and other descriptors for the font. For
-  # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
-  #
-  # For details regarding fonts from package dependencies,
-  # see https://flutter.dev/custom-fonts/#from-packages
+  fonts:
+    - family: Montserrat
+      fonts:
+        - asset: assets/fonts/montserrat/Montserrat-Thin.ttf
+          weight: 100
+        - asset: assets/fonts/montserrat/Montserrat-ExtraLight.ttf
+          weight: 200
+        - asset: assets/fonts/montserrat/Montserrat-Light.ttf
+          weight: 300
+        - asset: assets/fonts/montserrat/Montserrat-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/montserrat/Montserrat-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/montserrat/Montserrat-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/montserrat/Montserrat-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/montserrat/Montserrat-ExtraBold.ttf
+          weight: 800
+        - asset: assets/fonts/montserrat/Montserrat-Black.ttf
+          weight: 900

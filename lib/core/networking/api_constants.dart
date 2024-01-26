@@ -2,7 +2,8 @@ class ApiConstants {
   static const String apiBaseUrl = "https://test.kafiil.com/";
 
   static const String login = "api/test/user/login";
-  static const String signup = "api/test/user/register";
+  static const String register = "api/test/user/register";
+  static const String appDependencies = "api/test/dependencies";
 }
 
 class ApiErrors {

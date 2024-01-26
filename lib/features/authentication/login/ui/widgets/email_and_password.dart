@@ -44,9 +44,7 @@ class EmailAndPassword extends StatelessWidget {
               icon: Icon( isObscureText? Icons.visibility_off:Icons.visibility),
             ),
           );
-        },
-
-        ),
+        },),
       ],
     ));
   }

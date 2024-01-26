@@ -15,7 +15,7 @@ class DontHaveAnAccountText extends StatelessWidget {
       TextSpan(text: "Don’t have an account? ", style: TextStyles.font14GrayW500),
       TextSpan(text: "Register ", style: TextStyles.font14MainGreenW600,recognizer: TapGestureRecognizer()
         ..onTap = () {
-          context.pushReplacementNamed(Routes.registerScreen);
+          context.pushNamed(Routes.registerScreen);
         },),
     ]));
   }

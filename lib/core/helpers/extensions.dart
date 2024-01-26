@@ -18,3 +18,10 @@ extension Navigation on BuildContext{
 
   void pop() => Navigator.of(this).pop();
 }
+
+extension ScreenSize on BuildContext{
+  double get screenHeight=> MediaQuery.of(this).size.height;
+
+  double get screenWidth => MediaQuery.of(this).size.width;
+
+}

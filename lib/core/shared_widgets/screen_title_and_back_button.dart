@@ -5,28 +5,33 @@ import 'package:kafil_task/core/theming/colors.dart';
 import 'package:kafil_task/core/theming/text_styles.dart';
 
 class ScreenTitleAndBackButton extends StatelessWidget {
-  const ScreenTitleAndBackButton({
+  const  ScreenTitleAndBackButton({
     super.key, required this.screenTitle,
   });
   final String screenTitle;
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Column(
       children: [
-        IconButton(
-          onPressed: (){
-            context.pop();
-          },
-          icon: const Icon(
-            Icons.arrow_back_ios,
-            color: ColorsManager.black,
-          ),
+        Row(
+          children: [
+            InkWell(
+              onTap: (){
+                context.pop();
+              },
+              child: const Icon(
+                Icons.arrow_back_ios,
+                color: ColorsManager.black,
+              ),
+            ),
+            horizontalSpace(10),
+            Text(
+              screenTitle,
+              style: TextStyles.font18BlackW600,
+            )
+          ],
         ),
-        horizontalSpace(10),
-        Text(
-          screenTitle,
-          style: TextStyles.font18BlackW600,
-        )
+        verticalSpace(30),
       ],
     );
   }
