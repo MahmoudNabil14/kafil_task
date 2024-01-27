@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart' hide Headers;
 import 'package:kafil_task/core/app_dependecies/data/models/app_dependencies_response.dart';
 import 'package:kafil_task/core/networking/api_constants.dart';
@@ -20,13 +22,9 @@ abstract class ApiService {
   );
 
   @POST(ApiConstants.register)
-  @Headers({
-    'Accept': 'application/json',
-    'Accept-Language': 'ar',
-    'Content-Type': 'multipart/form-data',
-  })
+  @MultiPart()
   Future<RegisterResponse> register(
-      @Body() RegisterRequestBody registerRequestBody,
+      @Part() Map<String,dynamic> userData,
   );
 
   @GET(ApiConstants.appDependencies)

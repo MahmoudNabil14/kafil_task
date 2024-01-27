@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -82,21 +84,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   context.read<RegisterCubit>().selectedAvatar!.path, // Replace with the actual file path
                                   filename: 'avatar',
                                 ).then((selectedAvatar) {
-                                  RegisterRequestBody registerRequestBody = RegisterRequestBody(
-                                      firstName: context.read<RegisterCubit>().firstNameController.text,
-                                      lastName: context.read<RegisterCubit>().lastNameController.text,
-                                      email: context.read<RegisterCubit>().emailController.text,
-                                      password: context.read<RegisterCubit>().passwordController.text,
-                                      confirmPassword: context.read<RegisterCubit>().confirmPasswordController.text,
-                                      userType: context.read<RegisterCubit>().selectedType.id,
-                                      about: context.read<RegisterCubit>().aboutController.text,
-                                      brithDate: context.read<RegisterCubit>().birthDateController.text,
-                                      gender: context.read<RegisterCubit>().selectedGender!,
-                                      salary: context.read<RegisterCubit>().salary,
-                                      tags: [1,2],
-                                      avatar: context.read<RegisterCubit>().selectedAvatar,
-                                      favoriteSocialMedia: context.read<RegisterCubit>().favoriteSocialMedia);
-                                  context.read<RegisterCubit>().emitRegisterStates(registerRequestBody: registerRequestBody);
+
+                                  context.read<RegisterCubit>().emitRegisterStates();
                                 });
                               } else {
                                 setState(() {

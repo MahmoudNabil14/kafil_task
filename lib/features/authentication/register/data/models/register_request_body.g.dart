@@ -19,7 +19,7 @@ RegisterRequestBody _$RegisterRequestBodyFromJson(Map<String, dynamic> json) =>
       gender: json['gender'] as int,
       salary: json['salary'] as int,
       tags: (json['tags'] as List<dynamic>).map((e) => e as int).toList(),
-      favoriteSocialMedia: (json['favorite_social_media'] as List<dynamic>)
+      favoriteSocialMedia: (json['favoriteSocialMedia'] as List<dynamic>)
           .map((e) => e as String)
           .toList(),
     );
@@ -37,6 +37,4 @@ Map<String, dynamic> _$RegisterRequestBodyToJson(
       'birth_date': instance.brithDate,
       'gender': instance.gender,
       'salary': instance.salary,
-      'tags': instance.tags,
-      'favorite_social_media': instance.favoriteSocialMedia,
     };

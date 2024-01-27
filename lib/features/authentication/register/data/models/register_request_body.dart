@@ -21,10 +21,10 @@ class RegisterRequestBody {
   final String brithDate;
   final int gender;
   final int salary;
-  @JsonKey(includeFromJson: false)
-  final File? avatar;
+
+  @JsonKey(includeToJson: false)
   final List<int> tags;
-  @JsonKey(name: "favorite_social_media")
+  @JsonKey(includeToJson: false)
   final List<String> favoriteSocialMedia;
 
   RegisterRequestBody(
@@ -35,7 +35,6 @@ class RegisterRequestBody {
       required this.confirmPassword,
       required this.userType,
       required this.about,
-        this.avatar,
       required this.brithDate,
       required this.gender,
       required this.salary,

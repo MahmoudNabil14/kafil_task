@@ -49,18 +49,18 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<RegisterResponse> register(
-      RegisterRequestBody registerRequestBody) async {
+  Future<RegisterResponse> register(Map<String, dynamic> userData) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{
-      r'Accept': 'application/json',
-      r'Accept-Language': 'ar',
-      r'Content-Type': 'multipart/form-data',
-    };
-    _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
-    _data.addAll(registerRequestBody.toJson());
+    final _headers = <String, dynamic>{};
+    final FormData _formData = FormData.fromMap(userData);
+    _formData.files.add(MapEntry("avatar", await MultipartFile.fromFile(userData['avatar'].path)));
+    for (var element in userData['favorite_social_media']) {
+      _formData.fields.add(MapEntry("favorite_social_media[]", element.toString()));
+    }
+    for (var element in userData['tags']) {
+      _formData.fields.add(MapEntry("tags[]", element.toString()));
+    }
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<RegisterResponse>(Options(
       method: 'POST',
@@ -72,7 +72,7 @@ class _ApiService implements ApiService {
               _dio.options,
               'api/test/user/register',
               queryParameters: queryParameters,
-              data: _data,
+              data: _formData,
             )
             .copyWith(
                 baseUrl: _combineBaseUrls(

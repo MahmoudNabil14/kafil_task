@@ -29,6 +29,7 @@ class CompleteDataForm extends StatelessWidget {
           ProfileAvatar(picker: picker),
           verticalSpace(20),
           AppTextFormField(
+            controller: context.read<RegisterCubit>().aboutController,
             validator: (value) {
               if (value == null || value.isEmpty || !AppRegex.isAboutValid(value)) {
                 return "";
@@ -254,7 +255,7 @@ class BirthdateField extends StatelessWidget {
             ),
           ).then((selectedDate) {
             if (selectedDate != null) {
-              context.read<RegisterCubit>().birthDateController.text = DateFormat("yyyyy-MM-dd").format(selectedDate);
+              context.read<RegisterCubit>().birthDateController.text = DateFormat("yyyy-MM-dd").format(selectedDate);
             }
           });
         },

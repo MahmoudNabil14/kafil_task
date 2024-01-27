@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
@@ -40,9 +42,23 @@ class RegisterCubit extends Cubit<RegisterState> {
   List<num> tags = [];
   List<String> favoriteSocialMedia = [];
 
-  void emitRegisterStates({required RegisterRequestBody registerRequestBody}) async {
+  void emitRegisterStates() async {
+    RegisterRequestBody registerRequestBody = RegisterRequestBody(
+        firstName: firstNameController.text,
+        lastName: lastNameController.text,
+        email: emailController.text,
+        password: passwordController.text,
+        confirmPassword: confirmPasswordController.text,
+        userType: selectedType.id,
+        about: aboutController.text,
+        brithDate: birthDateController.text,
+        gender: selectedGender!,
+        salary: salary,
+        tags: [1,2],
+        favoriteSocialMedia: favoriteSocialMedia);
+
     emit(const RegisterState.loading());
-    final response = await _registerRepo.register(registerRequestBody: registerRequestBody, avatar: await MultipartFile.fromFile(selectedAvatar!.path));
+    final response = await _registerRepo.register(userData: userData,);
     response.when(success: (registerResponse) {
       emit(RegisterState.success(registerResponse));
     }, failure: (error) {
