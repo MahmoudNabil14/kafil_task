@@ -24,7 +24,19 @@ abstract class ApiService {
   @POST(ApiConstants.register)
   @MultiPart()
   Future<RegisterResponse> register(
-      @Part() Map<String,dynamic> userData,
+      @Part() String firstName,
+      @Part() String lastName,
+      @Part() String email,
+      @Part() String password,
+      @Part() String passwordConfirmation,
+      @Part() String about,
+      @Part() String birthDate,
+      @Part() int userType,
+      @Part() String gender,
+      @Part() String salary,
+      // @Part() List<String> tags,
+      // @Part() List<String> favoriteSocialMedia,
+      @Part(name: 'files') List<MultipartFile> avatar,
   );
 
   @GET(ApiConstants.appDependencies)

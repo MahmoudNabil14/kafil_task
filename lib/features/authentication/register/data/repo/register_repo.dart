@@ -10,8 +10,8 @@ class RegisterRepo{
 
   RegisterRepo(this._apiService);
 
-  Future<ApiResult<RegisterResponse>> register({required Map<String, dynamic> userData})async{
-    final response = await _apiService.register(userData);
+  Future<ApiResult<RegisterResponse>> register({required String firstName, required String lastName,required String email, required String password, required String passwordConfirmation, required String about, required String birthDate, required int type, required MultipartFile avatar, required String salary, required String gender})async{
+    final response = await _apiService.register(firstName,lastName,email, password,passwordConfirmation, about, birthDate, type, gender, salary,[avatar]);
     try{
       return ApiResult.success(response);
     }catch(error){

@@ -58,8 +58,22 @@ class RegisterCubit extends Cubit<RegisterState> {
         favoriteSocialMedia: favoriteSocialMedia);
 
     emit(const RegisterState.loading());
-    final response = await _registerRepo.register(userData: userData,);
-    response.when(success: (registerResponse) {
+    MultipartFile multipartFile = await MultipartFile.fromFile(selectedAvatar!.path, filename: selectedAvatar!.path.split('/').last);
+    final response = await _registerRepo.register(
+      firstName: firstNameController.text,
+      lastName: lastNameController.text,
+      email: emailController.text,
+      password: passwordController.text,
+      passwordConfirmation: confirmPasswordController.text,
+      about: aboutController.text,
+      birthDate: birthDateController.text,
+      type: selectedType.id,
+      gender: selectedGender.toString(),
+      salary: salary.toString(),
+      // tags: tags.map((e) => e.toString()).toList(),
+      // favoriteSocialMedia: favoriteSocialMedia,
+      avatar: multipartFile,
+    );    response.when(success: (registerResponse) {
       emit(RegisterState.success(registerResponse));
     }, failure: (error) {
       emit(RegisterState.error(error: error.apiErrorModel.message??''));

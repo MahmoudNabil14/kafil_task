@@ -14,7 +14,11 @@ class DioFactory {
       dio = Dio();
       dio!
         ..options.connectTimeout = timeOut
-        ..options.receiveTimeout = timeOut;
+        ..options.receiveTimeout = timeOut
+        ..options.followRedirects = false
+        ..options.validateStatus = (status) {
+          return status! < 500;
+        };
       addDioInterceptor();
       return dio!;
     } else {

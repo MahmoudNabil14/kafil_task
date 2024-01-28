@@ -49,18 +49,64 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<RegisterResponse> register(Map<String, dynamic> userData) async {
+  Future<RegisterResponse> register(
+    String firstName,
+    String lastName,
+    String email,
+    String password,
+    String passwordConfirmation,
+    String about,
+    String birthDate,
+    int userType,
+    String gender,
+    String salary,
+    List<MultipartFile> avatar,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final FormData _formData = FormData.fromMap(userData);
-    _formData.files.add(MapEntry("avatar", await MultipartFile.fromFile(userData['avatar'].path)));
-    for (var element in userData['favorite_social_media']) {
-      _formData.fields.add(MapEntry("favorite_social_media[]", element.toString()));
-    }
-    for (var element in userData['tags']) {
-      _formData.fields.add(MapEntry("tags[]", element.toString()));
-    }
+    final _data = FormData();
+    _data.fields.add(MapEntry(
+      'firstName',
+      firstName,
+    ));
+    _data.fields.add(MapEntry(
+      'lastName',
+      lastName,
+    ));
+    _data.fields.add(MapEntry(
+      'email',
+      email,
+    ));
+    _data.fields.add(MapEntry(
+      'password',
+      password,
+    ));
+    _data.fields.add(MapEntry(
+      'passwordConfirmation',
+      passwordConfirmation,
+    ));
+    _data.fields.add(MapEntry(
+      'about',
+      about,
+    ));
+    _data.fields.add(MapEntry(
+      'birthDate',
+      birthDate,
+    ));
+    _data.fields.add(MapEntry(
+      'userType',
+      userType.toString(),
+    ));
+    _data.fields.add(MapEntry(
+      'gender',
+      gender,
+    ));
+    _data.fields.add(MapEntry(
+      'salary',
+      salary,
+    ));
+    _data.files.addAll(avatar.map((i) => MapEntry('files', i)));
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<RegisterResponse>(Options(
       method: 'POST',
@@ -72,7 +118,7 @@ class _ApiService implements ApiService {
               _dio.options,
               'api/test/user/register',
               queryParameters: queryParameters,
-              data: _formData,
+              data: _data,
             )
             .copyWith(
                 baseUrl: _combineBaseUrls(
