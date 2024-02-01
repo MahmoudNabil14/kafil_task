@@ -424,6 +424,7 @@ class ProfileAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    File? selectedAvatar;
     return StatefulBuilder(
       builder: (BuildContext context, void Function(void Function()) setState) {
         return Stack(
@@ -449,93 +450,91 @@ class ProfileAvatar extends StatelessWidget {
                   showDialog(
                     context: context,
                     builder: (builderContext) {
-                      return BlocProvider<RegisterCubit>(
-                        create: (context) => getIt<RegisterCubit>(),
-                        child: AlertDialog(
-                          contentPadding: EdgeInsets.all(25.sp),
-                          content: SizedBox(
-                            height: 140.h,
-                            width: context.screenWidth,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Column(
-                                  children: [
-                                    GestureDetector(
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          color: ColorsManager.lightestGray,
-                                          borderRadius: BorderRadius.circular(15.r),
-                                        ),
-                                        height: 100.h,
-                                        width: 100.w,
-                                        child: Icon(
-                                          Icons.camera_alt_outlined,
-                                          color: ColorsManager.mainGreen,
-                                          size: 60.sp,
-                                        ),
+                      return AlertDialog(
+                        contentPadding: EdgeInsets.all(25.sp),
+                        content: SizedBox(
+                          height: 140.h,
+                          width: context.screenWidth,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Column(
+                                children: [
+                                  GestureDetector(
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color: ColorsManager.lightestGray,
+                                        borderRadius: BorderRadius.circular(15.r),
                                       ),
-                                      onTap: () async {
-                                        await picker.pickImage(source: ImageSource.camera).then((image) {
-                                          if (image != null) {
-                                            context.read<RegisterCubit>().selectedAvatar = File(image.path);
-                                            setState(() {
-                                              context.pop();
-                                            });
-                                          }
-                                        });
-
-                                      },
-                                    ),
-                                    verticalSpace(10),
-                                    Text(
-                                      "Camera",
-                                      style: TextStyles.font14BlackW500,
-                                    )
-                                  ],
-                                ),
-                                horizontalSpace(20),
-                                Column(
-                                  children: [
-                                    GestureDetector(
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          color: ColorsManager.lightestGray,
-                                          borderRadius: BorderRadius.circular(15.r),
-                                        ),
-                                        height: 100.h,
-                                        width: 100.w,
-                                        child: Icon(
-                                          Icons.photo,
-                                          color: ColorsManager.mainGreen,
-                                          size: 60.sp,
-                                        ),
+                                      height: 100.h,
+                                      width: 100.w,
+                                      child: Icon(
+                                        Icons.camera_alt_outlined,
+                                        color: ColorsManager.mainGreen,
+                                        size: 60.sp,
                                       ),
-                                      onTap: () async {
-                                        await picker.pickImage(source: ImageSource.gallery).then((image) {
-                                          if (image != null) {
-                                            context.read<RegisterCubit>().selectedAvatar = File(image.path);
-                                            setState(() {
-                                              context.pop();
-                                            });
-                                          }
-                                        });
-                                      },
                                     ),
-                                    verticalSpace(10),
-                                    Text(
-                                      "Gallery",
-                                      style: TextStyles.font14BlackW500,
-                                    )
-                                  ],
-                                ),
-                              ],
-                            ),
+                                    onTap: () async {
+                                      await picker.pickImage(source: ImageSource.camera).then((image) {
+                                        if (image != null) {
+                                          selectedAvatar = File(image.path);
+                                          context.pop();
+                                        }
+                                      });
+                                    },
+                                  ),
+                                  verticalSpace(10),
+                                  Text(
+                                    "Camera",
+                                    style: TextStyles.font14BlackW500,
+                                  )
+                                ],
+                              ),
+                              horizontalSpace(20),
+                              Column(
+                                children: [
+                                  GestureDetector(
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color: ColorsManager.lightestGray,
+                                        borderRadius: BorderRadius.circular(15.r),
+                                      ),
+                                      height: 100.h,
+                                      width: 100.w,
+                                      child: Icon(
+                                        Icons.photo,
+                                        color: ColorsManager.mainGreen,
+                                        size: 60.sp,
+                                      ),
+                                    ),
+                                    onTap: () async {
+                                      await picker.pickImage(source: ImageSource.gallery).then((image) {
+                                        if (image != null) {
+                                          selectedAvatar = File(image.path);
+                                          context.pop();
+                                        }
+                                      });
+                                    },
+                                  ),
+                                  verticalSpace(10),
+                                  Text(
+                                    "Gallery",
+                                    style: TextStyles.font14BlackW500,
+                                  )
+                                ],
+                              ),
+                            ],
                           ),
                         ),
                       );
                     },
-                  );
+                  ).then((value) {
+                    if (selectedAvatar != null) {
+                      setState(() {
+                        context.read<RegisterCubit>().selectedAvatar = selectedAvatar;
+                      });
+                    }
+                  });
                 },
                 icon: Center(
                   child: Icon(

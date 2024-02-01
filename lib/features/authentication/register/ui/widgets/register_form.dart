@@ -22,6 +22,7 @@ class RegisterForm extends StatelessWidget {
           verticalSpace(15),
           AppTextFormField(
               controller: context.read<RegisterCubit>().emailController,
+              textInputType: TextInputType.emailAddress,
               labelText: "Email Address",
               maxLength: 64,
               validator: (value) {

@@ -49,29 +49,36 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<RegisterResponse> register(
-    String firstName,
-    String lastName,
-    String email,
-    String password,
-    String passwordConfirmation,
-    String about,
-    String birthDate,
-    int userType,
-    String gender,
-    String salary,
-    List<MultipartFile> avatar,
-  ) async {
+  Future<RegisterResponse> register({
+    required String firstName,
+    required String lastName,
+    required String email,
+    required String password,
+    required String passwordConfirmation,
+    required int userType,
+    required List<MultipartFile> files,
+    required String about,
+    required int salary,
+    required String birthDate,
+    required int gender,
+    required List<String> tags,
+    required List<String> favoriteSocialMedia,
+  }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
+    final _headers = <String, dynamic>{
+      r'Accept': 'application/json',
+      r'Content-Type': 'multipart/form-data',
+      r'Accept-Language': 'ar',
+    };
+    _headers.removeWhere((k, v) => v == null);
     final _data = FormData();
     _data.fields.add(MapEntry(
-      'firstName',
+      'first_name',
       firstName,
     ));
     _data.fields.add(MapEntry(
-      'lastName',
+      'last_name',
       lastName,
     ));
     _data.fields.add(MapEntry(
@@ -83,30 +90,36 @@ class _ApiService implements ApiService {
       password,
     ));
     _data.fields.add(MapEntry(
-      'passwordConfirmation',
+      'password_confirmation',
       passwordConfirmation,
     ));
+    _data.fields.add(MapEntry(
+      'type',
+      userType.toString(),
+    ));
+    _data.files.addAll(files.map((i) => MapEntry('avatar', i)));
     _data.fields.add(MapEntry(
       'about',
       about,
     ));
     _data.fields.add(MapEntry(
-      'birthDate',
+      'salary',
+      salary.toString(),
+    ));
+    _data.fields.add(MapEntry(
+      'birth_date',
       birthDate,
     ));
     _data.fields.add(MapEntry(
-      'userType',
-      userType.toString(),
-    ));
-    _data.fields.add(MapEntry(
       'gender',
-      gender,
+      gender.toString(),
     ));
-    _data.fields.add(MapEntry(
-      'salary',
-      salary,
-    ));
-    _data.files.addAll(avatar.map((i) => MapEntry('files', i)));
+    tags.forEach((i) {
+      _data.fields.add(MapEntry('tags[]', i));
+    });
+    favoriteSocialMedia.forEach((i) {
+      _data.fields.add(MapEntry('favorite_social_media[]', i));
+    });
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<RegisterResponse>(Options(
       method: 'POST',

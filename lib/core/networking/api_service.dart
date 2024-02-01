@@ -22,22 +22,26 @@ abstract class ApiService {
   );
 
   @POST(ApiConstants.register)
-  @MultiPart()
-  Future<RegisterResponse> register(
-      @Part() String firstName,
-      @Part() String lastName,
-      @Part() String email,
-      @Part() String password,
-      @Part() String passwordConfirmation,
-      @Part() String about,
-      @Part() String birthDate,
-      @Part() int userType,
-      @Part() String gender,
-      @Part() String salary,
-      // @Part() List<String> tags,
-      // @Part() List<String> favoriteSocialMedia,
-      @Part(name: 'files') List<MultipartFile> avatar,
-  );
+  @Headers(<String, dynamic>{
+  "Accept": "application/json",
+  "Content-Type": "multipart/form-data",
+  'Accept-Language': 'ar'
+  })
+  Future<RegisterResponse> register({
+    @Part(name: "first_name") required String firstName,
+    @Part(name: "last_name") required String lastName,
+    @Part() required String email,
+    @Part() required String password,
+    @Part(name: "password_confirmation") required String passwordConfirmation,
+    @Part(name: "type") required int userType,
+    @Part(name: "avatar") required List<MultipartFile> files,
+    @Part() required String about,
+    @Part() required int salary,
+    @Part(name: "birth_date") required String birthDate,
+    @Part() required int gender,
+    @Part(name: "tags[]") required List<String> tags,
+    @Part(name: "favorite_social_media[]") required List<String> favoriteSocialMedia,
+  });
 
   @GET(ApiConstants.appDependencies)
 

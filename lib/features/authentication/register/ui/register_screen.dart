@@ -80,13 +80,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   completeDataFormValidationFailed = false;
                                 });
 
-                                await MultipartFile.fromFile(
-                                  context.read<RegisterCubit>().selectedAvatar!.path, // Replace with the actual file path
-                                  filename: 'avatar',
-                                ).then((selectedAvatar) {
+                                context.read<RegisterCubit>().emitRegisterStates();
 
-                                  context.read<RegisterCubit>().emitRegisterStates();
-                                });
                               } else {
                                 setState(() {
                                   completeDataFormValidationFailed = true;
