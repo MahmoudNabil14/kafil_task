@@ -21,6 +21,7 @@ class AppTextFormField extends StatelessWidget {
   final String? initialText;
   final TextInputAction textInputAction;
   final TextEditingController? controller;
+  final TextInputType? textInputType;
   final Function(String?) validator;
 
   const AppTextFormField({
@@ -40,7 +41,7 @@ class AppTextFormField extends StatelessWidget {
     required this.labelText,
     this.readOnly = false,
     this.textInputAction = TextInputAction.next,
-    this.maxLength, this.minLines,
+    this.maxLength, this.minLines, this.textInputType,
   });
 
   @override
@@ -55,6 +56,7 @@ class AppTextFormField extends StatelessWidget {
         verticalSpace(10),
         TextFormField(
           initialValue: initialText,
+          keyboardType: textInputType,
           minLines: minLines??1,
           maxLines: minLines??1,
           maxLength: maxLength,

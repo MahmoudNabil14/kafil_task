@@ -20,15 +20,15 @@ Future<void> setupGetIt() async {
 
   //app dependencies
   getIt.registerLazySingleton<AppDependenciesRepo>(() => AppDependenciesRepo(getIt()));
-  getIt.registerLazySingleton<AppDependenciesCubit>(() => AppDependenciesCubit(getIt()));
+  getIt.registerFactory<AppDependenciesCubit>(() => AppDependenciesCubit(getIt()));
 
   //login
   getIt.registerLazySingleton<LoginRepo>(() => LoginRepo(getIt()));
-  getIt.registerLazySingleton<LoginCubit>(() => LoginCubit(getIt()));
+  getIt.registerFactory<LoginCubit>(() => LoginCubit(getIt()));
 
   //register
   getIt.registerLazySingleton<RegisterRepo>(() => RegisterRepo(getIt()));
-  getIt.registerLazySingleton<RegisterCubit>(() => RegisterCubit(getIt()));
+  getIt.registerFactory<RegisterCubit>(() => RegisterCubit(getIt()));
 
   //who am i
   getIt.registerLazySingleton<WhoAmIRepo>(() => WhoAmIRepo(getIt()));

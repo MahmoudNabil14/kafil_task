@@ -16,15 +16,17 @@ class RegisterRequestBody {
   final String confirmPassword;
   @JsonKey(name: "type")
   final int userType;
+  @JsonKey(includeFromJson: false)
+  final MultipartFile? avatar;
   final String about;
   @JsonKey(name: "birth_date")
   final String brithDate;
   final int gender;
   final int salary;
-  @JsonKey(includeFromJson: false)
-  final File? avatar;
-  final List<int> tags;
-  @JsonKey(name: "favorite_social_media")
+
+  @JsonKey(includeToJson: false)
+  final List<String> tags;
+  @JsonKey(includeToJson: false)
   final List<String> favoriteSocialMedia;
 
   RegisterRequestBody(
@@ -34,8 +36,8 @@ class RegisterRequestBody {
       required this.password,
       required this.confirmPassword,
       required this.userType,
-      required this.about,
         this.avatar,
+      required this.about,
       required this.brithDate,
       required this.gender,
       required this.salary,

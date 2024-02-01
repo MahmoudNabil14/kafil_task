@@ -11,7 +11,6 @@ import 'package:kafil_task/features/authentication/login/ui/login_screen.dart';
 import 'package:kafil_task/features/authentication/register/logic/register_cubit.dart';
 import 'package:kafil_task/features/authentication/register/ui/register_screen.dart';
 
-
 class AppRouter {
   Route generateRoute(RouteSettings settings) {
     //this arguments to be passed in any screen like this ( arguments as ClassName )
@@ -19,12 +18,24 @@ class AppRouter {
 
     switch (settings.name) {
       case Routes.initialRoute:
-        return userAccessToken!=null ?MaterialPageRoute(
-          builder: (_) => BlocProvider<AppLayoutCubit>(create: (BuildContext context) {
-            return getIt<AppLayoutCubit>();
-          },
-              child: const AppLayout()),
-        ):MaterialPageRoute(
+        return userAccessToken != null
+            ? MaterialPageRoute(
+                builder: (_) => BlocProvider<AppLayoutCubit>(
+                    create: (BuildContext context) {
+                      return getIt<AppLayoutCubit>();
+                    },
+                    child: const AppLayout()),
+              )
+            : MaterialPageRoute(
+                builder: (_) => BlocProvider<LoginCubit>(
+                  create: (BuildContext context) {
+                    return getIt<LoginCubit>();
+                  },
+                  child: const LoginScreen(),
+                ),
+              );
+      case Routes.loginScreen:
+        return MaterialPageRoute(
           builder: (_) => BlocProvider<LoginCubit>(
             create: (BuildContext context) {
               return getIt<LoginCubit>();
@@ -52,10 +63,11 @@ class AppRouter {
         );
       case Routes.appLayout:
         return MaterialPageRoute(
-          builder: (_) => BlocProvider<AppLayoutCubit>(create: (BuildContext context) {
-            return getIt<AppLayoutCubit>();
-          },
-          child: const AppLayout()),
+          builder: (_) => BlocProvider<AppLayoutCubit>(
+              create: (BuildContext context) {
+                return getIt<AppLayoutCubit>();
+              },
+              child: const AppLayout()),
         );
       default:
         return MaterialPageRoute(

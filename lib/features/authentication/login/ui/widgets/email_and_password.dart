@@ -12,40 +12,42 @@ class EmailAndPassword extends StatelessWidget {
   Widget build(BuildContext context) {
     bool isObscureText = true;
     return Form(
-      key: context.read<LoginCubit>().formKey,
+        key: context.read<LoginCubit>().formKey,
         child: Column(
-      children: [
-        AppTextFormField(
-          controller: context.read<LoginCubit>().emailController,
-            labelText: "Email Address", validator: (value){
-              if(value == null ||
-                  value.isEmpty || !AppRegex.isEmailValid(value)){
-                return "Email Address format is invalid";
-              }
-        }),
-        verticalSpace(30),
-        StatefulBuilder(builder: (BuildContext context, void Function(void Function()) setState) {
-          return AppTextFormField(
-            controller: context.read<LoginCubit>().passwordController,
-            labelText: "Password",
-            validator: (value) {
-              if(value == null ||
-                  value.isEmpty || !AppRegex.passwordHasMinLength(value)){
-                return "Password must be at least 8 characters";
-              }
-            },
-            isObscureText: isObscureText,
-            suffixIcon: IconButton(
-              onPressed: () {
-                setState(() {
-                  isObscureText = !isObscureText;
-                });
+          children: [
+            AppTextFormField(
+                controller: context.read<LoginCubit>().emailController,
+                textInputType: TextInputType.emailAddress,
+                labelText: "Email Address",
+                validator: (value) {
+                  if (value == null || value.isEmpty || !AppRegex.isEmailValid(value)) {
+                    return "Email Address format is invalid";
+                  }
+                }),
+            verticalSpace(30),
+            StatefulBuilder(
+              builder: (BuildContext context, void Function(void Function()) setState) {
+                return AppTextFormField(
+                  controller: context.read<LoginCubit>().passwordController,
+                  labelText: "Password",
+                  validator: (value) {
+                    if (value == null || value.isEmpty || !AppRegex.passwordHasMinLength(value)) {
+                      return "Password must be at least 8 characters";
+                    }
+                  },
+                  isObscureText: isObscureText,
+                  suffixIcon: IconButton(
+                    onPressed: () {
+                      setState(() {
+                        isObscureText = !isObscureText;
+                      });
+                    },
+                    icon: Icon(isObscureText ? Icons.visibility_off : Icons.visibility),
+                  ),
+                );
               },
-              icon: Icon( isObscureText? Icons.visibility_off:Icons.visibility),
             ),
-          );
-        },),
-      ],
-    ));
+          ],
+        ));
   }
 }

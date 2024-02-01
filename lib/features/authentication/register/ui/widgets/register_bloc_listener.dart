@@ -25,7 +25,7 @@ class RegisterBlocListener extends StatelessWidget {
               ),
             ),
           );
-        }, success: (loginResponse) {
+        }, success: (registerResponse) {
           context.pushNamedAndRemoveUntil(Routes.loginScreen, predicate: (Route<dynamic> route)=>false);
           // context.pop();
         }, error: (error) {

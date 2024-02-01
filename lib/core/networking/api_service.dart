@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart' hide Headers;
 import 'package:kafil_task/core/app_dependecies/data/models/app_dependencies_response.dart';
 import 'package:kafil_task/core/networking/api_constants.dart';
@@ -20,14 +22,26 @@ abstract class ApiService {
   );
 
   @POST(ApiConstants.register)
-  @Headers({
-    'Accept': 'application/json',
-    'Accept-Language': 'ar',
-    'Content-Type': 'multipart/form-data',
+  @Headers(<String, dynamic>{
+  "Accept": "application/json",
+  "Content-Type": "multipart/form-data",
+  'Accept-Language': 'ar'
   })
-  Future<RegisterResponse> register(
-      @Body() RegisterRequestBody registerRequestBody,
-  );
+  Future<RegisterResponse> register({
+    @Part(name: "first_name") required String firstName,
+    @Part(name: "last_name") required String lastName,
+    @Part() required String email,
+    @Part() required String password,
+    @Part(name: "password_confirmation") required String passwordConfirmation,
+    @Part(name: "type") required int userType,
+    @Part(name: "avatar") required List<MultipartFile> files,
+    @Part() required String about,
+    @Part() required int salary,
+    @Part(name: "birth_date") required String birthDate,
+    @Part() required int gender,
+    @Part(name: "tags[]") required List<String> tags,
+    @Part(name: "favorite_social_media[]") required List<String> favoriteSocialMedia,
+  });
 
   @GET(ApiConstants.appDependencies)
 
