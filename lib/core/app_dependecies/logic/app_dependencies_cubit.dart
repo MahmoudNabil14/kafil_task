@@ -11,7 +11,7 @@ class AppDependenciesCubit extends Cubit<AppDependenciesState> {
     emit(const AppDependenciesState.loading());
     final response = await _appDependenciesRepo.getAppDependencies();
     response.when(success: (appDependenciesResponse) {
-      emit(AppDependenciesState.success(response));
+      emit(AppDependenciesState.success(appDependenciesResponse));
     }, failure: (error) {
       emit(AppDependenciesState.error(error: error.apiErrorModel.message ?? ""));
     });

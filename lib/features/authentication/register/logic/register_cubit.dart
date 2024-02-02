@@ -1,5 +1,3 @@
-import 'dart:convert';
-import 'dart:developer';
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
@@ -10,18 +8,9 @@ import 'register_state.dart';
 
 class RegisterCubit extends Cubit<RegisterState> {
   final RegisterRepo _registerRepo;
-  late List<UserType> userTypes;
-  late UserType selectedType;
 
-  RegisterCubit(this._registerRepo) : super(const RegisterState.initial()) {
-    // Initialize userTypes and selectedType in the constructor
-    userTypes = [
-      UserType(id: 1, type: "Seller"),
-      UserType(id: 2, type: "Buyer"),
-      UserType(id: 3, type: "Both"),
-    ];
-    selectedType = userTypes[0];
-  }
+  RegisterCubit(this._registerRepo) : super(const RegisterState.initial());
+
 
   final TextEditingController firstNameController = TextEditingController();
   final TextEditingController lastNameController = TextEditingController();
@@ -38,9 +27,10 @@ class RegisterCubit extends Cubit<RegisterState> {
 
   //gender can be 0-1-null
   int? selectedGender;
+  int? selectedType;
   File? selectedAvatar;
-  List<num> tags = [];
-  List<String> favoriteSocialMedia = [];
+  List<String> selectedTags = [];
+  List<String> selectedFavoriteSocialMedia = [];
 
   void emitRegisterStates() async {
     RegisterRequestBody registerRequestBody = RegisterRequestBody(
@@ -49,14 +39,14 @@ class RegisterCubit extends Cubit<RegisterState> {
       email: emailController.text,
       password: passwordController.text,
       confirmPassword: confirmPasswordController.text,
-      userType: selectedType.id,
+      userType: selectedType!,
       avatar: await MultipartFile.fromFile(selectedAvatar!.path, filename: selectedAvatar!.path.split('/').last),
       about: aboutController.text,
       brithDate: birthDateController.text,
-      gender: selectedGender!,
+      gender: selectedGender,
       salary: salary,
-      tags: ["1", "2"],
-      favoriteSocialMedia: favoriteSocialMedia,
+      tags: selectedTags,
+      favoriteSocialMedia: selectedFavoriteSocialMedia,
     );
 
     emit(const RegisterState.loading());

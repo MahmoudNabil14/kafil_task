@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kafil_task/core/app_dependecies/logic/app_dependencies_cubit.dart';
+import 'package:kafil_task/core/app_dependecies/logic/app_dependencies_state.dart';
 import 'package:kafil_task/core/helpers/app_regex.dart';
 import 'package:kafil_task/core/helpers/spacing.dart';
 import 'package:kafil_task/core/shared_widgets/app_text_form_field.dart';
@@ -103,37 +105,61 @@ class UserTypesDropDown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StatefulBuilder(
-      builder: (BuildContext context, void Function(void Function()) setState) {
-        return AppTextFormField(
-          readOnly: true,
-          controller: context.read<RegisterCubit>().userTypeController,
-            validator: (value) {
-            if(value == null || value.isEmpty){
-              return "";
-            }
-            },
-            labelText: "User Type",
-            suffixIcon: PopupMenuButton<int>(
-              color: ColorsManager.lightestGray,
-              icon: Icon(
-                Icons.keyboard_arrow_down_outlined,
-                color: ColorsManager.lighterGray,
-                size: 28.sp,
+    return BlocBuilder<AppDependenciesCubit, AppDependenciesState>(
+      builder: (context, state) {
+        return state.when(
+          initial: () {
+            return const SizedBox.shrink();
+          },
+          loading: () {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          },
+          error: (error) {
+            return Center(
+              child: Text(
+                error,
               ),
-              onSelected: (int type) {
-                setState(() {
-                  context.read<RegisterCubit>().userTypeController.text = context.read<RegisterCubit>().userTypes[type - 1].type;
-                  context.read<RegisterCubit>().selectedType = context.read<RegisterCubit>().userTypes[type - 1];
-                });
+            );
+          },
+          success: (appDependencies) {
+            return StatefulBuilder(
+              builder: (BuildContext context, void Function(void Function()) setState) {
+                return AppTextFormField(
+                    readOnly: true,
+                    controller: context.read<RegisterCubit>().userTypeController,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return "";
+                      }
+                    },
+                    labelText: "User Type",
+                    suffixIcon: PopupMenuButton<int>(
+
+                      color: ColorsManager.lightestGray,
+                      icon: Icon(
+                        Icons.keyboard_arrow_down_outlined,
+                        color: ColorsManager.lighterGray,
+                        size: 28.sp,
+                      ),
+                      onSelected: (int type) {
+                        setState(() {
+                          context.read<RegisterCubit>().userTypeController.text = appDependencies.userData.userTypes.singleWhere((element) => element.value==type).label;
+                          context.read<RegisterCubit>().selectedType = appDependencies.userData.userTypes.singleWhere((element) => element.value==type).value;
+                        });
+                      },
+                      itemBuilder: (BuildContext context) => appDependencies.userData.userTypes.map((userType) {
+                        return PopupMenuItem<int>(
+                          value: userType.value,
+                          child: Text(userType.label),
+                        );
+                      }).toList(),
+                    ));
               },
-              itemBuilder: (BuildContext context) => context.read<RegisterCubit>().userTypes.map((userType) {
-                return PopupMenuItem<int>(
-                  value: userType.id,
-                  child: Text(userType.type),
-                );
-              }).toList(),
-            ));
+            );
+          },
+        );
       },
     );
   }

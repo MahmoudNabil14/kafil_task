@@ -60,12 +60,13 @@ class _ApiService implements ApiService {
     required String about,
     required int salary,
     required String birthDate,
-    required int gender,
+    int? gender,
     required List<String> tags,
     required List<String> favoriteSocialMedia,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{
       r'Accept': 'application/json',
       r'Content-Type': 'multipart/form-data',
@@ -110,10 +111,12 @@ class _ApiService implements ApiService {
       'birth_date',
       birthDate,
     ));
-    _data.fields.add(MapEntry(
-      'gender',
-      gender.toString(),
-    ));
+    if (gender != null) {
+      _data.fields.add(MapEntry(
+        'gender',
+        gender.toString(),
+      ));
+    }
     tags.forEach((i) {
       _data.fields.add(MapEntry('tags[]', i));
     });

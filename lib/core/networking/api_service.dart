@@ -1,11 +1,8 @@
-import 'dart:developer';
-
 import 'package:dio/dio.dart' hide Headers;
 import 'package:kafil_task/core/app_dependecies/data/models/app_dependencies_response.dart';
 import 'package:kafil_task/core/networking/api_constants.dart';
 import 'package:kafil_task/features/authentication/login/data/models/login_request_body.dart';
 import 'package:kafil_task/features/authentication/login/data/models/login_response.dart';
-import 'package:kafil_task/features/authentication/register/data/models/register_request_body.dart';
 import 'package:kafil_task/features/authentication/register/data/models/register_response.dart';
 import 'package:kafil_task/features/who_am_i/data/models/who_am_i_response.dart';
 import 'package:retrofit/retrofit.dart';
@@ -38,7 +35,7 @@ abstract class ApiService {
     @Part() required String about,
     @Part() required int salary,
     @Part(name: "birth_date") required String birthDate,
-    @Part() required int gender,
+    @Part() int? gender,
     @Part(name: "tags[]") required List<String> tags,
     @Part(name: "favorite_social_media[]") required List<String> favoriteSocialMedia,
   });

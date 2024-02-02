@@ -16,7 +16,7 @@ RegisterRequestBody _$RegisterRequestBodyFromJson(Map<String, dynamic> json) =>
       userType: json['type'] as int,
       about: json['about'] as String,
       brithDate: json['birth_date'] as String,
-      gender: json['gender'] as int,
+      gender: json['gender'] as int?,
       salary: json['salary'] as int,
       tags: (json['tags'] as List<dynamic>).map((e) => e as String).toList(),
       favoriteSocialMedia: (json['favoriteSocialMedia'] as List<dynamic>)

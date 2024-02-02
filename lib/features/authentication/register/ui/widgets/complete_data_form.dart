@@ -1,12 +1,12 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:kafil_task/core/di/dependency_injection.dart';
+import 'package:kafil_task/core/app_dependecies/logic/app_dependencies_cubit.dart';
+import 'package:kafil_task/core/app_dependecies/logic/app_dependencies_state.dart';
 import 'package:kafil_task/core/helpers/app_regex.dart';
 import 'package:kafil_task/core/helpers/extensions.dart';
 import 'package:kafil_task/core/helpers/spacing.dart';
@@ -47,59 +47,101 @@ class CompleteDataForm extends StatelessWidget {
           verticalSpace(15),
           const GenderRadioButtons(),
           //Skills
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Skills",
-                style: TextStyles.font12GrayW500,
-              ),
-              verticalSpace(10),
-              Container(
-                width: double.infinity,
-                clipBehavior: Clip.antiAliasWithSaveLayer,
-                padding: EdgeInsets.all(20.sp),
-                decoration: BoxDecoration(
-                  color: ColorsManager.lightestGray,
-                  borderRadius: BorderRadius.circular(16.r),
-                ),
-                height: 120.h,
-                child: StatefulBuilder(
-                  builder: (BuildContext context, void Function(void Function()) setState) {
-                    return GridView(
-                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
-                      padding: const EdgeInsets.all(0.0),
-                      shrinkWrap: true,
-                      children: const [
-                        ChoiceChip(label: Text("data"), selected: true),
-                        ChoiceChip(label: Text("data"), selected: true),
-                        ChoiceChip(label: Text("data"), selected: true),
-                        ChoiceChip(label: Text("data"), selected: true),
-                        ChoiceChip(label: Text("data"), selected: true),
-                        ChoiceChip(label: Text("data"), selected: true),
-                        ChoiceChip(label: Text("data"), selected: true),
-                        ChoiceChip(label: Text("data"), selected: true),
-                        ChoiceChip(label: Text("data"), selected: true),
-                        ChoiceChip(label: Text("data"), selected: true),
-                        ChoiceChip(label: Text("data"), selected: true),
-                        ChoiceChip(label: Text("data"), selected: true),
-                        ChoiceChip(label: Text("data"), selected: true),
-                        ChoiceChip(label: Text("data"), selected: true),
-                        ChoiceChip(label: Text("data"), selected: true),
-                        ChoiceChip(label: Text("data"), selected: true),
-                        ChoiceChip(label: Text("data"), selected: true),
-                        ChoiceChip(label: Text("data"), selected: true),
-                      ],
-                    );
-                  },
-                ),
-              ),
-            ],
-          ),
+          const SkillsList(),
           verticalSpace(15),
           const FavoriteSocialMedia(),
         ],
       ),
+    );
+  }
+}
+
+class SkillsList extends StatelessWidget {
+  const SkillsList({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "Skills",
+          style: TextStyles.font12GrayW500,
+        ),
+        verticalSpace(10),
+        Container(
+          width: double.infinity,
+          clipBehavior: Clip.antiAliasWithSaveLayer,
+          padding: EdgeInsets.all(20.sp),
+          decoration: BoxDecoration(
+            color: ColorsManager.lightestGray,
+            borderRadius: BorderRadius.circular(16.r),
+          ),
+          height: 160.h,
+          child: BlocBuilder<AppDependenciesCubit, AppDependenciesState>(
+            builder: (context, state) {
+              return state.when(
+                initial: () {
+                  return const SizedBox.shrink();
+                },
+                loading: () {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                },
+                error: (error) {
+                  return Center(
+                    child: Text(
+                      error,
+                    ),
+                  );
+                },
+                success: (appDependencies) {
+                  return StatefulBuilder(
+                    builder: (BuildContext context, void Function(void Function()) setState) {
+                      List<String> tags = context.read<RegisterCubit>().selectedTags;
+                      return GridView.builder(
+                        shrinkWrap: true,
+                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2, // change this number to display more or less items in a row
+                          childAspectRatio: 3, // change this number to control the aspect ratio of the items
+                        ),
+                        itemCount: appDependencies.userData.userSkills.length,
+                        itemBuilder: (context, index) {
+                          return ChoiceChip(
+                            avatar: tags.contains(appDependencies.userData.userSkills[index].value.toString())
+                                ? Icon(Icons.close, color: ColorsManager.mainGreen, size: 20.sp)
+                                : null,
+                            showCheckmark: false,
+                            selectedColor: ColorsManager.moreLighterGreen,
+                            label: Text(
+                              appDependencies.userData.userSkills[index].label,
+                              maxLines: 3,
+                              softWrap: true,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyles.font12MainGreenW500,
+                            ),
+                            selected: tags.contains(appDependencies.userData.userSkills[index].value.toString()),
+                            onSelected: (bool selected) {
+                              setState(() {
+                                tags.contains(appDependencies.userData.userSkills[index].value.toString())
+                                    ? tags.remove(appDependencies.userData.userSkills[index].value.toString())
+                                    : tags.add(appDependencies.userData.userSkills[index].value.toString());
+                              });
+                            },
+                          );
+                        },
+                      );
+                    },
+                  );
+                },
+              );
+            },
+          ),
+        ),
+      ],
     );
   }
 }
@@ -111,116 +153,77 @@ class FavoriteSocialMedia extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StatefulBuilder(
-      builder: (BuildContext context, void Function(void Function()) setState) {
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "Favorite Social Media",
-              style: TextStyles.font12GrayW500,
-            ),
-            verticalSpace(5),
-            Row(
-              children: [
-                Checkbox(
-                  value: context.read<RegisterCubit>().favoriteSocialMedia.contains("facebook"),
-                  onChanged: (isSelected) {
-                    setState(() {
-                      context.read<RegisterCubit>().favoriteSocialMedia.contains("facebook")
-                          ? context.read<RegisterCubit>().favoriteSocialMedia.remove("facebook")
-                          : context.read<RegisterCubit>().favoriteSocialMedia.add("facebook");
-                    });
-                  },
-                  fillColor: MaterialStateProperty.resolveWith<Color>(
-                    (states) {
-                      return context.read<RegisterCubit>().favoriteSocialMedia.contains("facebook") ? ColorsManager.mainGreen : ColorsManager.white;
-                    },
-                  ),
-                  side: BorderSide(width: 1.5.w, color: ColorsManager.lighterGray),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(3.r),
-                  ),
-                ),
-                SvgPicture.asset(
-                  "assets/svgs/facebook.svg",
-                  height: 22.h,
-                  width: 22.w,
-                ),
-                horizontalSpace(10),
-                Text(
-                  "Facebook",
-                  style: TextStyles.font14BlackW500,
-                ),
-              ],
-            ),
-            Row(
-              children: [
-                Checkbox(
-                  value: context.read<RegisterCubit>().favoriteSocialMedia.contains("x"),
-                  onChanged: (isSelected) {
-                    setState(() {
-                      context.read<RegisterCubit>().favoriteSocialMedia.contains("x")
-                          ? context.read<RegisterCubit>().favoriteSocialMedia.remove("x")
-                          : context.read<RegisterCubit>().favoriteSocialMedia.add("x");
-                    });
-                  },
-                  fillColor: MaterialStateProperty.resolveWith<Color>(
-                    (states) {
-                      return context.read<RegisterCubit>().favoriteSocialMedia.contains("x") ? ColorsManager.mainGreen : Colors.white;
-                    },
-                  ),
-                  side: BorderSide(width: 1.5.w, color: ColorsManager.lighterGray),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(3.r),
-                  ),
-                ),
-                SvgPicture.asset(
-                  "assets/svgs/twitter.svg",
-                  height: 22.h,
-                  width: 22.w,
-                ),
-                horizontalSpace(10),
-                Text(
-                  "Twitter",
-                  style: TextStyles.font14BlackW500,
-                ),
-              ],
-            ),
-            Row(
-              children: [
-                Checkbox(
-                  value: context.read<RegisterCubit>().favoriteSocialMedia.contains("instagram"),
-                  onChanged: (isSelected) {
-                    setState(() {
-                      context.read<RegisterCubit>().favoriteSocialMedia.contains("instagram")
-                          ? context.read<RegisterCubit>().favoriteSocialMedia.remove("instagram")
-                          : context.read<RegisterCubit>().favoriteSocialMedia.add("instagram");
-                    });
-                  },
-                  fillColor: MaterialStateProperty.resolveWith<Color>(
-                    (states) {
-                      return context.read<RegisterCubit>().favoriteSocialMedia.contains("instagram") ? ColorsManager.mainGreen : ColorsManager.white;
-                    },
-                  ),
-                  side: BorderSide(width: 1.5.w, color: ColorsManager.lighterGray),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(3.r),
-                  ),
-                ),
-                SvgPicture.asset(
-                  "assets/svgs/instagram.svg",
-                  height: 22.h,
-                  width: 22.w,
-                ),
-                horizontalSpace(10),
-                Text(
-                  "Instagram",
-                  style: TextStyles.font14BlackW500,
-                ),
-              ],
-            ),
-          ],
+    return BlocBuilder<AppDependenciesCubit, AppDependenciesState>(
+      builder: (context, state) {
+        return state.when(
+          initial: () {
+            return const SizedBox.shrink();
+          },
+          loading: () {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          },
+          error: (error) {
+            return Center(
+              child: Text(
+                error,
+              ),
+            );
+          },
+          success: (appDependencies) {
+            return StatefulBuilder(
+              builder: (BuildContext context, void Function(void Function()) setState) {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Favorite Social Media",
+                      style: TextStyles.font12GrayW500,
+                    ),
+                    verticalSpace(5),
+                    ...appDependencies.userData.socialMedia
+                        .map((socialMedia) => Row(
+                              children: [
+                                Checkbox(
+                                  value: context.read<RegisterCubit>().selectedFavoriteSocialMedia.contains(socialMedia.value),
+                                  onChanged: (isSelected) {
+                                    setState(() {
+                                      context.read<RegisterCubit>().selectedFavoriteSocialMedia.contains(socialMedia.value)
+                                          ? context.read<RegisterCubit>().selectedFavoriteSocialMedia.remove(socialMedia.value)
+                                          : context.read<RegisterCubit>().selectedFavoriteSocialMedia.add(socialMedia.value);
+                                    });
+                                  },
+                                  fillColor: MaterialStateProperty.resolveWith<Color>(
+                                    (states) {
+                                      return context.read<RegisterCubit>().selectedFavoriteSocialMedia.contains(socialMedia.value)
+                                          ? ColorsManager.mainGreen
+                                          : ColorsManager.white;
+                                    },
+                                  ),
+                                  side: BorderSide(width: 1.5.w, color: ColorsManager.lighterGray),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(3.r),
+                                  ),
+                                ),
+                                SvgPicture.asset(
+                                  "assets/svgs/${socialMedia.value}.svg",
+                                  height: 22.h,
+                                  width: 22.w,
+                                ),
+                                horizontalSpace(10),
+                                Text(
+                                  socialMedia.label,
+                                  style: TextStyles.font14BlackW500,
+                                ),
+                              ],
+                            ))
+                        .toList(),
+                  ],
+                );
+              },
+            );
+          },
         );
       },
     );
