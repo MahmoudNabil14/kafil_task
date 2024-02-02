@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:dio/dio.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'register_request_body.g.dart';
@@ -21,7 +19,7 @@ class RegisterRequestBody {
   final String about;
   @JsonKey(name: "birth_date")
   final String brithDate;
-  final int gender;
+  final int? gender;
   final int salary;
 
   @JsonKey(includeToJson: false)

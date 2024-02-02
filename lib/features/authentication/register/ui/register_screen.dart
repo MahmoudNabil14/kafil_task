@@ -1,13 +1,9 @@
-import 'dart:developer';
-
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kafil_task/core/helpers/spacing.dart';
 import 'package:kafil_task/core/shared_widgets/app_text_button.dart';
 import 'package:kafil_task/core/shared_widgets/screen_title_and_back_button.dart';
-import 'package:kafil_task/features/authentication/register/data/models/register_request_body.dart';
 import 'package:kafil_task/features/authentication/register/logic/register_cubit.dart';
 import 'package:kafil_task/features/authentication/register/ui/widgets/app_dependencies_bloc_listener.dart';
 import 'package:kafil_task/features/authentication/register/ui/widgets/complete_data_form.dart';
@@ -74,8 +70,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             onPressed: () async {
                               if (context.read<RegisterCubit>().completeDataFormKey.currentState!.validate() &&
                                   context.read<RegisterCubit>().selectedAvatar != null &&
-                                  context.read<RegisterCubit>().selectedGender != null &&
-                                  context.read<RegisterCubit>().favoriteSocialMedia.isNotEmpty) {
+                                  context.read<RegisterCubit>().selectedType != null &&
+                                  context.read<RegisterCubit>().selectedTags.isNotEmpty &&
+                                  context.read<RegisterCubit>().selectedFavoriteSocialMedia.isNotEmpty) {
                                 setState(() {
                                   completeDataFormValidationFailed = false;
                                 });

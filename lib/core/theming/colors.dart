@@ -10,10 +10,12 @@ class ColorsManager {
   light ==> 400
   lighter ==> 300
   moreLight ==> 200
+  moreLighter ==> 100
   lightest ==> 50
    */
 
   static const Color mainGreen = Color(0xFF1DBF73);
+  static const Color moreLighterGreen = Color(0xFFE9F9F1);
   static const Color black = Color(0xFF000000);
   static const Color darkGray = Color(0xFF333333);
   static const Color gray = Color(0xFF696F79);
