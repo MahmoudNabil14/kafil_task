@@ -1,10 +1,10 @@
 import 'package:dio/dio.dart' hide Headers;
 import 'package:kafil_task/core/app_dependecies/data/models/app_dependencies_response.dart';
-import 'package:kafil_task/core/helpers/constants.dart';
 import 'package:kafil_task/core/networking/api_constants.dart';
 import 'package:kafil_task/features/authentication/login/data/models/login_request_body.dart';
 import 'package:kafil_task/features/authentication/login/data/models/login_response.dart';
 import 'package:kafil_task/features/authentication/register/data/models/register_response.dart';
+import 'package:kafil_task/features/services/data/models/service_response_model.dart';
 import 'package:kafil_task/features/who_am_i/data/models/who_am_i_response.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -52,4 +52,14 @@ abstract class ApiService {
     'Accept-Language': 'ar'
   })
   Future<WhoAmIResponse> whoAmI(@Header('Authorization') String userAccessToken);
+
+  @GET(ApiConstants.services)
+  @Headers(<String, dynamic>{
+    'Accept': 'application/json',
+    'Accept-Language': 'ar'
+  })
+  Future<ServiceResponseModel> getServices();
+
+  @GET(ApiConstants.popularServices)
+  Future<ServiceResponseModel> getPopularServices();
 }
