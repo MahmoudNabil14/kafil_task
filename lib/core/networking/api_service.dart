@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart' hide Headers;
 import 'package:kafil_task/core/app_dependecies/data/models/app_dependencies_response.dart';
+import 'package:kafil_task/core/helpers/constants.dart';
 import 'package:kafil_task/core/networking/api_constants.dart';
 import 'package:kafil_task/features/authentication/login/data/models/login_request_body.dart';
 import 'package:kafil_task/features/authentication/login/data/models/login_response.dart';
@@ -14,6 +15,7 @@ abstract class ApiService {
   factory ApiService(Dio dio, {String baseUrl}) = _ApiService;
 
   @POST(ApiConstants.login)
+
   Future<LoginResponse> login(
     @Body() LoginRequestBody loginRequestBody,
   );
@@ -41,9 +43,13 @@ abstract class ApiService {
   });
 
   @GET(ApiConstants.appDependencies)
-
   Future<AppDependenciesResponse> getAppDependencies();
 
   @GET(ApiConstants.whoAmI)
-  Future<WhoAmIResponse> whoAmI();
+  @Headers(<String, dynamic>{
+    'Authorization': "{userAccessToken}",
+    'Accept': 'application/json',
+    'Accept-Language': 'ar'
+  })
+  Future<WhoAmIResponse> whoAmI(@Header('Authorization') String userAccessToken);
 }

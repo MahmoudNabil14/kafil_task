@@ -9,6 +9,7 @@ class TextStyles {
   static TextStyle font12lighterGrayW400 = TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w400, color: ColorsManager.lighterGray);
   static TextStyle font12MainGreenW500 = TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w500, color: ColorsManager.mainGreen);
   static TextStyle font14WhiteW500 = TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500, color: ColorsManager.white);
+  static TextStyle font14RedW500 = TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500, color: Colors.red);
   static TextStyle font14GrayW500 = TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500, color: ColorsManager.gray);
   static TextStyle font14MainGreenW600 = TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600, color: ColorsManager.mainGreen);
   static TextStyle font14DarkGrayW500 = TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500, color: ColorsManager.darkGray);

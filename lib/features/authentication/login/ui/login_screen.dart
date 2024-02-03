@@ -11,6 +11,7 @@ import 'package:kafil_task/features/authentication/login/ui/widgets/dont_have_an
 import 'package:kafil_task/features/authentication/login/ui/widgets/email_and_password.dart';
 import 'package:kafil_task/features/authentication/login/ui/widgets/login_bloc_listener.dart';
 import 'package:kafil_task/features/authentication/login/ui/widgets/remember_me_and_forget_password.dart';
+import 'package:kafil_task/features/authentication/register/ui/widgets/app_dependencies_bloc_listener.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -46,7 +47,8 @@ class LoginScreen extends StatelessWidget {
                     ),
                     verticalSpace(30),
                     const DontHaveAnAccountText(),
-                    const LoginBlocListener()
+                    const LoginBlocListener(),
+                    const AppDependenciesBlocListener()
                   ],
                 ),
               ),
