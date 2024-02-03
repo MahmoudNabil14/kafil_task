@@ -5,6 +5,8 @@ class ApiConstants {
   static const String register = "api/test/user/register";
   static const String appDependencies = "api/test/dependencies";
   static const String whoAmI = "api/test/user/who-am-i";
+  static const String services = "api/test/service";
+  static const String popularServices = "api/test/service/popular";
 }
 
 class ApiErrors {
