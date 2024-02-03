@@ -45,21 +45,11 @@ class AppRouter {
         );
       case Routes.registerScreen:
         return MaterialPageRoute(
-          builder: (_) => MultiBlocProvider(
-            providers: [
-              BlocProvider<RegisterCubit>(
-                create: (BuildContext context) {
-                  return getIt<RegisterCubit>();
-                },
-              ),
-              BlocProvider<AppDependenciesCubit>(
-                create: (BuildContext context) {
-                  return getIt<AppDependenciesCubit>()..emitAppDependenciesState();
-                },
-              ),
-            ],
-            child: const RegisterScreen(),
-          ),
+          builder: (_) => BlocProvider<RegisterCubit>(
+              create: (BuildContext context) {
+                return getIt<RegisterCubit>();
+              },
+              child: const RegisterScreen()),
         );
       case Routes.appLayout:
         return MaterialPageRoute(

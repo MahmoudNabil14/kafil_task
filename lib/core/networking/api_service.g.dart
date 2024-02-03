@@ -173,10 +173,15 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<WhoAmIResponse> whoAmI() async {
+  Future<WhoAmIResponse> whoAmI(String userAccessToken) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
+    final _headers = <String, dynamic>{
+      r'Authorization': userAccessToken,
+      r'Accept': 'application/json',
+      r'Accept-Language': 'ar',
+    };
+    _headers.removeWhere((k, v) => v == null);
     final Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<WhoAmIResponse>(Options(

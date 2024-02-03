@@ -46,7 +46,6 @@ class CompleteDataForm extends StatelessWidget {
           const BirthdateField(),
           verticalSpace(15),
           const GenderRadioButtons(),
-          //Skills
           const SkillsList(),
           verticalSpace(15),
           const FavoriteSocialMedia(),
@@ -86,19 +85,19 @@ class SkillsList extends StatelessWidget {
                 initial: () {
                   return const SizedBox.shrink();
                 },
-                loading: () {
+                appDependenciesLoading: () {
                   return const Center(
                     child: CircularProgressIndicator(),
                   );
                 },
-                error: (error) {
+                appDependenciesError: (error) {
                   return Center(
                     child: Text(
                       error,
                     ),
                   );
                 },
-                success: (appDependencies) {
+                appDependenciesSuccess: (appDependencies) {
                   return StatefulBuilder(
                     builder: (BuildContext context, void Function(void Function()) setState) {
                       List<String> tags = context.read<RegisterCubit>().selectedTags;
@@ -159,19 +158,19 @@ class FavoriteSocialMedia extends StatelessWidget {
           initial: () {
             return const SizedBox.shrink();
           },
-          loading: () {
+          appDependenciesLoading: () {
             return const Center(
               child: CircularProgressIndicator(),
             );
           },
-          error: (error) {
+          appDependenciesError: (error) {
             return Center(
               child: Text(
                 error,
               ),
             );
           },
-          success: (appDependencies) {
+          appDependenciesSuccess: (appDependencies) {
             return StatefulBuilder(
               builder: (BuildContext context, void Function(void Function()) setState) {
                 return Column(

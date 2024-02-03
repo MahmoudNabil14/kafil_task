@@ -111,19 +111,19 @@ class UserTypesDropDown extends StatelessWidget {
           initial: () {
             return const SizedBox.shrink();
           },
-          loading: () {
+          appDependenciesLoading: () {
             return const Center(
               child: CircularProgressIndicator(),
             );
           },
-          error: (error) {
+          appDependenciesError: (error) {
             return Center(
               child: Text(
                 error,
               ),
             );
           },
-          success: (appDependencies) {
+          appDependenciesSuccess: (appDependencies) {
             return StatefulBuilder(
               builder: (BuildContext context, void Function(void Function()) setState) {
                 return AppTextFormField(

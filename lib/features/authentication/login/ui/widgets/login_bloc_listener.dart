@@ -17,6 +17,7 @@ class LoginBlocListener extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<LoginCubit, LoginState>(
       listener: (context, state) {
+        print("hell");
         state.whenOrNull(loading: () {
           showDialog(
             context: context,

@@ -8,9 +8,9 @@ class WhoAmIRepo{
 
   WhoAmIRepo(this._apiService);
 
-  Future<ApiResult<WhoAmIResponse>> whoAmI()async{
-    final response = await _apiService.whoAmI();
+  Future<ApiResult<WhoAmIResponse>> whoAmI({required String userAccessToken})async{
     try{
+      final response = await _apiService.whoAmI(userAccessToken);
       return ApiResult.success(response);
     }catch(error){
       return ApiResult.failure(ErrorHandler.handle(error));
