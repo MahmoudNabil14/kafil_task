@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:kafil_task/kafil_app.dart';
 
-import 'package:kafil_task/main.dart';
+import 'package:kafil_task/main_development.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {

@@ -1,8 +1,13 @@
 class ApiConstants {
-  static const String apiBaseUrl = "https://vcare.integration25.com/api/";
+  static const String apiBaseUrl = "https://test.kafiil.com/";
 
-  static const String login = "auth/login";
-  static const String signup = "auth/register";
+  static const String login = "api/test/user/login";
+  static const String register = "api/test/user/register";
+  static const String appDependencies = "api/test/dependencies";
+  static const String whoAmI = "api/test/user/who-am-i";
+  static const String services = "api/test/service";
+  static const String popularServices = "api/test/service/popular";
+  static const String countries = "api/test/country";
 }
 
 class ApiErrors {
