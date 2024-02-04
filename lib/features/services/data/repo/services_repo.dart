@@ -11,7 +11,6 @@ class ServicesRepo {
   Future<ApiResult<ServiceResponseModel>> getServices() async {
     try {
       final response = await _apiService.getServices();
-      print("hiiiiiiiiii");
       return ApiResult.success(response);
 
     } catch (error) {

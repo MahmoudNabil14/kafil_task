@@ -14,6 +14,7 @@ class TextStyles {
   static TextStyle font14WhiteW500 = TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500, color: ColorsManager.white);
   static TextStyle font14RedW500 = TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500, color: Colors.red);
   static TextStyle font14GrayW500 = TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500, color: ColorsManager.gray);
+  static TextStyle font14GrayW600 = TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600, color: ColorsManager.gray);
   static TextStyle font14MainGreenW600 = TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600, color: ColorsManager.mainGreen);
   static TextStyle font14DarkGrayW500 = TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500, color: ColorsManager.darkGray);
   static TextStyle font15BlackW500 = TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w500, color: ColorsManager.black);
@@ -21,4 +22,5 @@ class TextStyles {
   static TextStyle font12lighterOrangeW500 = TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w500, color: ColorsManager.lighterOrange);
   static TextStyle font12WhiteW500 = TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w500, color: ColorsManager.white);
   static TextStyle font14BlackW500 = TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500, color: ColorsManager.black);
+  static TextStyle font12BlackW500 = TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w500, color: ColorsManager.black);
 }

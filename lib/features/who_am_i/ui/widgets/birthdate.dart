@@ -6,10 +6,10 @@ import 'package:kafil_task/core/theming/colors.dart';
 class BirthdateField extends StatelessWidget {
   const BirthdateField({
     super.key,
-    this.birthDate,
+    required this.birthDate,
   });
 
-  final String? birthDate;
+  final String birthDate;
 
   @override
   Widget build(BuildContext context) {

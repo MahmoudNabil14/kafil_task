@@ -6,6 +6,7 @@ void showApiErrorDialog({required BuildContext context, required String error}) 
   context.pop();
   showDialog(
     context: context,
+    barrierDismissible: false,
     builder: (context) => AlertDialog(
       icon: const Icon(
         Icons.error,

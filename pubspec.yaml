@@ -47,6 +47,11 @@ dependencies:
   #For loading and cache network images. Can also be used with placeholder and error widgets.
   cached_network_image: ^3.3.1
 
+  #For pagination buttons.
+  pagination_flutter:
+    git:
+      url: "https://github.com/MahmoudNabil14/flutter_pagination"
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

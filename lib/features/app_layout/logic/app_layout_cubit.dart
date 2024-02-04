@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kafil_task/core/di/dependency_injection.dart';
 import 'package:kafil_task/features/app_layout/logic/app_layout_state.dart';
 import 'package:kafil_task/features/countries/ui/countries_screen.dart';
+import 'package:kafil_task/features/services/logic/services_cubit.dart';
 import 'package:kafil_task/features/services/ui/services_screen.dart';
 import 'package:kafil_task/features/who_am_i/ui/who_am_i_screen.dart';
 
@@ -21,7 +23,9 @@ class AppLayoutCubit extends Cubit<AppLayoutState> {
   List<Widget> appLayoutScreens =[
    const WhoAmIScreen(),
     const CountriesScreen(),
-    const ServicesScreen(),
+    BlocProvider(
+        create: (BuildContext context) => getIt<ServicesCubit>()..getServices()..getPopularServices(),
+        child: const ServicesScreen()),
   ];
 }
 

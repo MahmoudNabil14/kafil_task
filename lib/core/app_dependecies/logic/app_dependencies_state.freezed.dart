@@ -15,12 +15,13 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$AppDependenciesState<T> {
+mixin _$AppDependenciesState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() appDependenciesLoading,
-    required TResult Function(T appDependenciesResponse) appDependenciesSuccess,
+    required TResult Function(AppDependenciesResponse appDependenciesResponse)
+        appDependenciesSuccess,
     required TResult Function(String error) appDependenciesError,
   }) =>
       throw _privateConstructorUsedError;
@@ -28,7 +29,8 @@ mixin _$AppDependenciesState<T> {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? appDependenciesLoading,
-    TResult? Function(T appDependenciesResponse)? appDependenciesSuccess,
+    TResult? Function(AppDependenciesResponse appDependenciesResponse)?
+        appDependenciesSuccess,
     TResult? Function(String error)? appDependenciesError,
   }) =>
       throw _privateConstructorUsedError;
@@ -36,52 +38,52 @@ mixin _$AppDependenciesState<T> {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? appDependenciesLoading,
-    TResult Function(T appDependenciesResponse)? appDependenciesSuccess,
+    TResult Function(AppDependenciesResponse appDependenciesResponse)?
+        appDependenciesSuccess,
     TResult Function(String error)? appDependenciesError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initial<T> value) initial,
-    required TResult Function(appDependenciesLoading<T> value)
+    required TResult Function(_Initial value) initial,
+    required TResult Function(appDependenciesLoading value)
         appDependenciesLoading,
-    required TResult Function(appDependenciesSuccess<T> value)
+    required TResult Function(appDependenciesSuccess value)
         appDependenciesSuccess,
-    required TResult Function(appDependenciesError<T> value)
-        appDependenciesError,
+    required TResult Function(appDependenciesError value) appDependenciesError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial<T> value)? initial,
-    TResult? Function(appDependenciesLoading<T> value)? appDependenciesLoading,
-    TResult? Function(appDependenciesSuccess<T> value)? appDependenciesSuccess,
-    TResult? Function(appDependenciesError<T> value)? appDependenciesError,
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(appDependenciesLoading value)? appDependenciesLoading,
+    TResult? Function(appDependenciesSuccess value)? appDependenciesSuccess,
+    TResult? Function(appDependenciesError value)? appDependenciesError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial<T> value)? initial,
-    TResult Function(appDependenciesLoading<T> value)? appDependenciesLoading,
-    TResult Function(appDependenciesSuccess<T> value)? appDependenciesSuccess,
-    TResult Function(appDependenciesError<T> value)? appDependenciesError,
+    TResult Function(_Initial value)? initial,
+    TResult Function(appDependenciesLoading value)? appDependenciesLoading,
+    TResult Function(appDependenciesSuccess value)? appDependenciesSuccess,
+    TResult Function(appDependenciesError value)? appDependenciesError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $AppDependenciesStateCopyWith<T, $Res> {
-  factory $AppDependenciesStateCopyWith(AppDependenciesState<T> value,
-          $Res Function(AppDependenciesState<T>) then) =
-      _$AppDependenciesStateCopyWithImpl<T, $Res, AppDependenciesState<T>>;
+abstract class $AppDependenciesStateCopyWith<$Res> {
+  factory $AppDependenciesStateCopyWith(AppDependenciesState value,
+          $Res Function(AppDependenciesState) then) =
+      _$AppDependenciesStateCopyWithImpl<$Res, AppDependenciesState>;
 }
 
 /// @nodoc
-class _$AppDependenciesStateCopyWithImpl<T, $Res,
-        $Val extends AppDependenciesState<T>>
-    implements $AppDependenciesStateCopyWith<T, $Res> {
+class _$AppDependenciesStateCopyWithImpl<$Res,
+        $Val extends AppDependenciesState>
+    implements $AppDependenciesStateCopyWith<$Res> {
   _$AppDependenciesStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -91,35 +93,35 @@ class _$AppDependenciesStateCopyWithImpl<T, $Res,
 }
 
 /// @nodoc
-abstract class _$$InitialImplCopyWith<T, $Res> {
+abstract class _$$InitialImplCopyWith<$Res> {
   factory _$$InitialImplCopyWith(
-          _$InitialImpl<T> value, $Res Function(_$InitialImpl<T>) then) =
-      __$$InitialImplCopyWithImpl<T, $Res>;
+          _$InitialImpl value, $Res Function(_$InitialImpl) then) =
+      __$$InitialImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$InitialImplCopyWithImpl<T, $Res>
-    extends _$AppDependenciesStateCopyWithImpl<T, $Res, _$InitialImpl<T>>
-    implements _$$InitialImplCopyWith<T, $Res> {
+class __$$InitialImplCopyWithImpl<$Res>
+    extends _$AppDependenciesStateCopyWithImpl<$Res, _$InitialImpl>
+    implements _$$InitialImplCopyWith<$Res> {
   __$$InitialImplCopyWithImpl(
-      _$InitialImpl<T> _value, $Res Function(_$InitialImpl<T>) _then)
+      _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$InitialImpl<T> implements _Initial<T> {
+class _$InitialImpl implements _Initial {
   const _$InitialImpl();
 
   @override
   String toString() {
-    return 'AppDependenciesState<$T>.initial()';
+    return 'AppDependenciesState.initial()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$InitialImpl<T>);
+        (other.runtimeType == runtimeType && other is _$InitialImpl);
   }
 
   @override
@@ -130,7 +132,8 @@ class _$InitialImpl<T> implements _Initial<T> {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() appDependenciesLoading,
-    required TResult Function(T appDependenciesResponse) appDependenciesSuccess,
+    required TResult Function(AppDependenciesResponse appDependenciesResponse)
+        appDependenciesSuccess,
     required TResult Function(String error) appDependenciesError,
   }) {
     return initial();
@@ -141,7 +144,8 @@ class _$InitialImpl<T> implements _Initial<T> {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? appDependenciesLoading,
-    TResult? Function(T appDependenciesResponse)? appDependenciesSuccess,
+    TResult? Function(AppDependenciesResponse appDependenciesResponse)?
+        appDependenciesSuccess,
     TResult? Function(String error)? appDependenciesError,
   }) {
     return initial?.call();
@@ -152,7 +156,8 @@ class _$InitialImpl<T> implements _Initial<T> {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? appDependenciesLoading,
-    TResult Function(T appDependenciesResponse)? appDependenciesSuccess,
+    TResult Function(AppDependenciesResponse appDependenciesResponse)?
+        appDependenciesSuccess,
     TResult Function(String error)? appDependenciesError,
     required TResult orElse(),
   }) {
@@ -165,13 +170,12 @@ class _$InitialImpl<T> implements _Initial<T> {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initial<T> value) initial,
-    required TResult Function(appDependenciesLoading<T> value)
+    required TResult Function(_Initial value) initial,
+    required TResult Function(appDependenciesLoading value)
         appDependenciesLoading,
-    required TResult Function(appDependenciesSuccess<T> value)
+    required TResult Function(appDependenciesSuccess value)
         appDependenciesSuccess,
-    required TResult Function(appDependenciesError<T> value)
-        appDependenciesError,
+    required TResult Function(appDependenciesError value) appDependenciesError,
   }) {
     return initial(this);
   }
@@ -179,10 +183,10 @@ class _$InitialImpl<T> implements _Initial<T> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial<T> value)? initial,
-    TResult? Function(appDependenciesLoading<T> value)? appDependenciesLoading,
-    TResult? Function(appDependenciesSuccess<T> value)? appDependenciesSuccess,
-    TResult? Function(appDependenciesError<T> value)? appDependenciesError,
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(appDependenciesLoading value)? appDependenciesLoading,
+    TResult? Function(appDependenciesSuccess value)? appDependenciesSuccess,
+    TResult? Function(appDependenciesError value)? appDependenciesError,
   }) {
     return initial?.call(this);
   }
@@ -190,10 +194,10 @@ class _$InitialImpl<T> implements _Initial<T> {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial<T> value)? initial,
-    TResult Function(appDependenciesLoading<T> value)? appDependenciesLoading,
-    TResult Function(appDependenciesSuccess<T> value)? appDependenciesSuccess,
-    TResult Function(appDependenciesError<T> value)? appDependenciesError,
+    TResult Function(_Initial value)? initial,
+    TResult Function(appDependenciesLoading value)? appDependenciesLoading,
+    TResult Function(appDependenciesSuccess value)? appDependenciesSuccess,
+    TResult Function(appDependenciesError value)? appDependenciesError,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -203,44 +207,44 @@ class _$InitialImpl<T> implements _Initial<T> {
   }
 }
 
-abstract class _Initial<T> implements AppDependenciesState<T> {
-  const factory _Initial() = _$InitialImpl<T>;
+abstract class _Initial implements AppDependenciesState {
+  const factory _Initial() = _$InitialImpl;
 }
 
 /// @nodoc
-abstract class _$$appDependenciesLoadingImplCopyWith<T, $Res> {
+abstract class _$$appDependenciesLoadingImplCopyWith<$Res> {
   factory _$$appDependenciesLoadingImplCopyWith(
-          _$appDependenciesLoadingImpl<T> value,
-          $Res Function(_$appDependenciesLoadingImpl<T>) then) =
-      __$$appDependenciesLoadingImplCopyWithImpl<T, $Res>;
+          _$appDependenciesLoadingImpl value,
+          $Res Function(_$appDependenciesLoadingImpl) then) =
+      __$$appDependenciesLoadingImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$appDependenciesLoadingImplCopyWithImpl<T, $Res>
-    extends _$AppDependenciesStateCopyWithImpl<T, $Res,
-        _$appDependenciesLoadingImpl<T>>
-    implements _$$appDependenciesLoadingImplCopyWith<T, $Res> {
+class __$$appDependenciesLoadingImplCopyWithImpl<$Res>
+    extends _$AppDependenciesStateCopyWithImpl<$Res,
+        _$appDependenciesLoadingImpl>
+    implements _$$appDependenciesLoadingImplCopyWith<$Res> {
   __$$appDependenciesLoadingImplCopyWithImpl(
-      _$appDependenciesLoadingImpl<T> _value,
-      $Res Function(_$appDependenciesLoadingImpl<T>) _then)
+      _$appDependenciesLoadingImpl _value,
+      $Res Function(_$appDependenciesLoadingImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$appDependenciesLoadingImpl<T> implements appDependenciesLoading<T> {
+class _$appDependenciesLoadingImpl implements appDependenciesLoading {
   const _$appDependenciesLoadingImpl();
 
   @override
   String toString() {
-    return 'AppDependenciesState<$T>.appDependenciesLoading()';
+    return 'AppDependenciesState.appDependenciesLoading()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$appDependenciesLoadingImpl<T>);
+            other is _$appDependenciesLoadingImpl);
   }
 
   @override
@@ -251,7 +255,8 @@ class _$appDependenciesLoadingImpl<T> implements appDependenciesLoading<T> {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() appDependenciesLoading,
-    required TResult Function(T appDependenciesResponse) appDependenciesSuccess,
+    required TResult Function(AppDependenciesResponse appDependenciesResponse)
+        appDependenciesSuccess,
     required TResult Function(String error) appDependenciesError,
   }) {
     return appDependenciesLoading();
@@ -262,7 +267,8 @@ class _$appDependenciesLoadingImpl<T> implements appDependenciesLoading<T> {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? appDependenciesLoading,
-    TResult? Function(T appDependenciesResponse)? appDependenciesSuccess,
+    TResult? Function(AppDependenciesResponse appDependenciesResponse)?
+        appDependenciesSuccess,
     TResult? Function(String error)? appDependenciesError,
   }) {
     return appDependenciesLoading?.call();
@@ -273,7 +279,8 @@ class _$appDependenciesLoadingImpl<T> implements appDependenciesLoading<T> {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? appDependenciesLoading,
-    TResult Function(T appDependenciesResponse)? appDependenciesSuccess,
+    TResult Function(AppDependenciesResponse appDependenciesResponse)?
+        appDependenciesSuccess,
     TResult Function(String error)? appDependenciesError,
     required TResult orElse(),
   }) {
@@ -286,13 +293,12 @@ class _$appDependenciesLoadingImpl<T> implements appDependenciesLoading<T> {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initial<T> value) initial,
-    required TResult Function(appDependenciesLoading<T> value)
+    required TResult Function(_Initial value) initial,
+    required TResult Function(appDependenciesLoading value)
         appDependenciesLoading,
-    required TResult Function(appDependenciesSuccess<T> value)
+    required TResult Function(appDependenciesSuccess value)
         appDependenciesSuccess,
-    required TResult Function(appDependenciesError<T> value)
-        appDependenciesError,
+    required TResult Function(appDependenciesError value) appDependenciesError,
   }) {
     return appDependenciesLoading(this);
   }
@@ -300,10 +306,10 @@ class _$appDependenciesLoadingImpl<T> implements appDependenciesLoading<T> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial<T> value)? initial,
-    TResult? Function(appDependenciesLoading<T> value)? appDependenciesLoading,
-    TResult? Function(appDependenciesSuccess<T> value)? appDependenciesSuccess,
-    TResult? Function(appDependenciesError<T> value)? appDependenciesError,
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(appDependenciesLoading value)? appDependenciesLoading,
+    TResult? Function(appDependenciesSuccess value)? appDependenciesSuccess,
+    TResult? Function(appDependenciesError value)? appDependenciesError,
   }) {
     return appDependenciesLoading?.call(this);
   }
@@ -311,10 +317,10 @@ class _$appDependenciesLoadingImpl<T> implements appDependenciesLoading<T> {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial<T> value)? initial,
-    TResult Function(appDependenciesLoading<T> value)? appDependenciesLoading,
-    TResult Function(appDependenciesSuccess<T> value)? appDependenciesSuccess,
-    TResult Function(appDependenciesError<T> value)? appDependenciesError,
+    TResult Function(_Initial value)? initial,
+    TResult Function(appDependenciesLoading value)? appDependenciesLoading,
+    TResult Function(appDependenciesSuccess value)? appDependenciesSuccess,
+    TResult Function(appDependenciesError value)? appDependenciesError,
     required TResult orElse(),
   }) {
     if (appDependenciesLoading != null) {
@@ -324,83 +330,84 @@ class _$appDependenciesLoadingImpl<T> implements appDependenciesLoading<T> {
   }
 }
 
-abstract class appDependenciesLoading<T> implements AppDependenciesState<T> {
-  const factory appDependenciesLoading() = _$appDependenciesLoadingImpl<T>;
+abstract class appDependenciesLoading implements AppDependenciesState {
+  const factory appDependenciesLoading() = _$appDependenciesLoadingImpl;
 }
 
 /// @nodoc
-abstract class _$$appDependenciesSuccessImplCopyWith<T, $Res> {
+abstract class _$$appDependenciesSuccessImplCopyWith<$Res> {
   factory _$$appDependenciesSuccessImplCopyWith(
-          _$appDependenciesSuccessImpl<T> value,
-          $Res Function(_$appDependenciesSuccessImpl<T>) then) =
-      __$$appDependenciesSuccessImplCopyWithImpl<T, $Res>;
+          _$appDependenciesSuccessImpl value,
+          $Res Function(_$appDependenciesSuccessImpl) then) =
+      __$$appDependenciesSuccessImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({T appDependenciesResponse});
+  $Res call({AppDependenciesResponse appDependenciesResponse});
 }
 
 /// @nodoc
-class __$$appDependenciesSuccessImplCopyWithImpl<T, $Res>
-    extends _$AppDependenciesStateCopyWithImpl<T, $Res,
-        _$appDependenciesSuccessImpl<T>>
-    implements _$$appDependenciesSuccessImplCopyWith<T, $Res> {
+class __$$appDependenciesSuccessImplCopyWithImpl<$Res>
+    extends _$AppDependenciesStateCopyWithImpl<$Res,
+        _$appDependenciesSuccessImpl>
+    implements _$$appDependenciesSuccessImplCopyWith<$Res> {
   __$$appDependenciesSuccessImplCopyWithImpl(
-      _$appDependenciesSuccessImpl<T> _value,
-      $Res Function(_$appDependenciesSuccessImpl<T>) _then)
+      _$appDependenciesSuccessImpl _value,
+      $Res Function(_$appDependenciesSuccessImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? appDependenciesResponse = freezed,
+    Object? appDependenciesResponse = null,
   }) {
-    return _then(_$appDependenciesSuccessImpl<T>(
-      freezed == appDependenciesResponse
+    return _then(_$appDependenciesSuccessImpl(
+      null == appDependenciesResponse
           ? _value.appDependenciesResponse
           : appDependenciesResponse // ignore: cast_nullable_to_non_nullable
-              as T,
+              as AppDependenciesResponse,
     ));
   }
 }
 
 /// @nodoc
 
-class _$appDependenciesSuccessImpl<T> implements appDependenciesSuccess<T> {
+class _$appDependenciesSuccessImpl implements appDependenciesSuccess {
   const _$appDependenciesSuccessImpl(this.appDependenciesResponse);
 
   @override
-  final T appDependenciesResponse;
+  final AppDependenciesResponse appDependenciesResponse;
 
   @override
   String toString() {
-    return 'AppDependenciesState<$T>.appDependenciesSuccess(appDependenciesResponse: $appDependenciesResponse)';
+    return 'AppDependenciesState.appDependenciesSuccess(appDependenciesResponse: $appDependenciesResponse)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$appDependenciesSuccessImpl<T> &&
-            const DeepCollectionEquality().equals(
-                other.appDependenciesResponse, appDependenciesResponse));
+            other is _$appDependenciesSuccessImpl &&
+            (identical(
+                    other.appDependenciesResponse, appDependenciesResponse) ||
+                other.appDependenciesResponse == appDependenciesResponse));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType,
-      const DeepCollectionEquality().hash(appDependenciesResponse));
+  int get hashCode => Object.hash(runtimeType, appDependenciesResponse);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$appDependenciesSuccessImplCopyWith<T, _$appDependenciesSuccessImpl<T>>
-      get copyWith => __$$appDependenciesSuccessImplCopyWithImpl<T,
-          _$appDependenciesSuccessImpl<T>>(this, _$identity);
+  _$$appDependenciesSuccessImplCopyWith<_$appDependenciesSuccessImpl>
+      get copyWith => __$$appDependenciesSuccessImplCopyWithImpl<
+          _$appDependenciesSuccessImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() appDependenciesLoading,
-    required TResult Function(T appDependenciesResponse) appDependenciesSuccess,
+    required TResult Function(AppDependenciesResponse appDependenciesResponse)
+        appDependenciesSuccess,
     required TResult Function(String error) appDependenciesError,
   }) {
     return appDependenciesSuccess(appDependenciesResponse);
@@ -411,7 +418,8 @@ class _$appDependenciesSuccessImpl<T> implements appDependenciesSuccess<T> {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? appDependenciesLoading,
-    TResult? Function(T appDependenciesResponse)? appDependenciesSuccess,
+    TResult? Function(AppDependenciesResponse appDependenciesResponse)?
+        appDependenciesSuccess,
     TResult? Function(String error)? appDependenciesError,
   }) {
     return appDependenciesSuccess?.call(appDependenciesResponse);
@@ -422,7 +430,8 @@ class _$appDependenciesSuccessImpl<T> implements appDependenciesSuccess<T> {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? appDependenciesLoading,
-    TResult Function(T appDependenciesResponse)? appDependenciesSuccess,
+    TResult Function(AppDependenciesResponse appDependenciesResponse)?
+        appDependenciesSuccess,
     TResult Function(String error)? appDependenciesError,
     required TResult orElse(),
   }) {
@@ -435,13 +444,12 @@ class _$appDependenciesSuccessImpl<T> implements appDependenciesSuccess<T> {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initial<T> value) initial,
-    required TResult Function(appDependenciesLoading<T> value)
+    required TResult Function(_Initial value) initial,
+    required TResult Function(appDependenciesLoading value)
         appDependenciesLoading,
-    required TResult Function(appDependenciesSuccess<T> value)
+    required TResult Function(appDependenciesSuccess value)
         appDependenciesSuccess,
-    required TResult Function(appDependenciesError<T> value)
-        appDependenciesError,
+    required TResult Function(appDependenciesError value) appDependenciesError,
   }) {
     return appDependenciesSuccess(this);
   }
@@ -449,10 +457,10 @@ class _$appDependenciesSuccessImpl<T> implements appDependenciesSuccess<T> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial<T> value)? initial,
-    TResult? Function(appDependenciesLoading<T> value)? appDependenciesLoading,
-    TResult? Function(appDependenciesSuccess<T> value)? appDependenciesSuccess,
-    TResult? Function(appDependenciesError<T> value)? appDependenciesError,
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(appDependenciesLoading value)? appDependenciesLoading,
+    TResult? Function(appDependenciesSuccess value)? appDependenciesSuccess,
+    TResult? Function(appDependenciesError value)? appDependenciesError,
   }) {
     return appDependenciesSuccess?.call(this);
   }
@@ -460,10 +468,10 @@ class _$appDependenciesSuccessImpl<T> implements appDependenciesSuccess<T> {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial<T> value)? initial,
-    TResult Function(appDependenciesLoading<T> value)? appDependenciesLoading,
-    TResult Function(appDependenciesSuccess<T> value)? appDependenciesSuccess,
-    TResult Function(appDependenciesError<T> value)? appDependenciesError,
+    TResult Function(_Initial value)? initial,
+    TResult Function(appDependenciesLoading value)? appDependenciesLoading,
+    TResult Function(appDependenciesSuccess value)? appDependenciesSuccess,
+    TResult Function(appDependenciesError value)? appDependenciesError,
     required TResult orElse(),
   }) {
     if (appDependenciesSuccess != null) {
@@ -473,33 +481,32 @@ class _$appDependenciesSuccessImpl<T> implements appDependenciesSuccess<T> {
   }
 }
 
-abstract class appDependenciesSuccess<T> implements AppDependenciesState<T> {
-  const factory appDependenciesSuccess(final T appDependenciesResponse) =
-      _$appDependenciesSuccessImpl<T>;
+abstract class appDependenciesSuccess implements AppDependenciesState {
+  const factory appDependenciesSuccess(
+          final AppDependenciesResponse appDependenciesResponse) =
+      _$appDependenciesSuccessImpl;
 
-  T get appDependenciesResponse;
+  AppDependenciesResponse get appDependenciesResponse;
   @JsonKey(ignore: true)
-  _$$appDependenciesSuccessImplCopyWith<T, _$appDependenciesSuccessImpl<T>>
+  _$$appDependenciesSuccessImplCopyWith<_$appDependenciesSuccessImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$appDependenciesErrorImplCopyWith<T, $Res> {
-  factory _$$appDependenciesErrorImplCopyWith(
-          _$appDependenciesErrorImpl<T> value,
-          $Res Function(_$appDependenciesErrorImpl<T>) then) =
-      __$$appDependenciesErrorImplCopyWithImpl<T, $Res>;
+abstract class _$$appDependenciesErrorImplCopyWith<$Res> {
+  factory _$$appDependenciesErrorImplCopyWith(_$appDependenciesErrorImpl value,
+          $Res Function(_$appDependenciesErrorImpl) then) =
+      __$$appDependenciesErrorImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String error});
 }
 
 /// @nodoc
-class __$$appDependenciesErrorImplCopyWithImpl<T, $Res>
-    extends _$AppDependenciesStateCopyWithImpl<T, $Res,
-        _$appDependenciesErrorImpl<T>>
-    implements _$$appDependenciesErrorImplCopyWith<T, $Res> {
-  __$$appDependenciesErrorImplCopyWithImpl(_$appDependenciesErrorImpl<T> _value,
-      $Res Function(_$appDependenciesErrorImpl<T>) _then)
+class __$$appDependenciesErrorImplCopyWithImpl<$Res>
+    extends _$AppDependenciesStateCopyWithImpl<$Res, _$appDependenciesErrorImpl>
+    implements _$$appDependenciesErrorImplCopyWith<$Res> {
+  __$$appDependenciesErrorImplCopyWithImpl(_$appDependenciesErrorImpl _value,
+      $Res Function(_$appDependenciesErrorImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -507,7 +514,7 @@ class __$$appDependenciesErrorImplCopyWithImpl<T, $Res>
   $Res call({
     Object? error = null,
   }) {
-    return _then(_$appDependenciesErrorImpl<T>(
+    return _then(_$appDependenciesErrorImpl(
       error: null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -518,7 +525,7 @@ class __$$appDependenciesErrorImplCopyWithImpl<T, $Res>
 
 /// @nodoc
 
-class _$appDependenciesErrorImpl<T> implements appDependenciesError<T> {
+class _$appDependenciesErrorImpl implements appDependenciesError {
   const _$appDependenciesErrorImpl({required this.error});
 
   @override
@@ -526,14 +533,14 @@ class _$appDependenciesErrorImpl<T> implements appDependenciesError<T> {
 
   @override
   String toString() {
-    return 'AppDependenciesState<$T>.appDependenciesError(error: $error)';
+    return 'AppDependenciesState.appDependenciesError(error: $error)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$appDependenciesErrorImpl<T> &&
+            other is _$appDependenciesErrorImpl &&
             (identical(other.error, error) || other.error == error));
   }
 
@@ -543,16 +550,18 @@ class _$appDependenciesErrorImpl<T> implements appDependenciesError<T> {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$appDependenciesErrorImplCopyWith<T, _$appDependenciesErrorImpl<T>>
-      get copyWith => __$$appDependenciesErrorImplCopyWithImpl<T,
-          _$appDependenciesErrorImpl<T>>(this, _$identity);
+  _$$appDependenciesErrorImplCopyWith<_$appDependenciesErrorImpl>
+      get copyWith =>
+          __$$appDependenciesErrorImplCopyWithImpl<_$appDependenciesErrorImpl>(
+              this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() appDependenciesLoading,
-    required TResult Function(T appDependenciesResponse) appDependenciesSuccess,
+    required TResult Function(AppDependenciesResponse appDependenciesResponse)
+        appDependenciesSuccess,
     required TResult Function(String error) appDependenciesError,
   }) {
     return appDependenciesError(error);
@@ -563,7 +572,8 @@ class _$appDependenciesErrorImpl<T> implements appDependenciesError<T> {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? appDependenciesLoading,
-    TResult? Function(T appDependenciesResponse)? appDependenciesSuccess,
+    TResult? Function(AppDependenciesResponse appDependenciesResponse)?
+        appDependenciesSuccess,
     TResult? Function(String error)? appDependenciesError,
   }) {
     return appDependenciesError?.call(error);
@@ -574,7 +584,8 @@ class _$appDependenciesErrorImpl<T> implements appDependenciesError<T> {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? appDependenciesLoading,
-    TResult Function(T appDependenciesResponse)? appDependenciesSuccess,
+    TResult Function(AppDependenciesResponse appDependenciesResponse)?
+        appDependenciesSuccess,
     TResult Function(String error)? appDependenciesError,
     required TResult orElse(),
   }) {
@@ -587,13 +598,12 @@ class _$appDependenciesErrorImpl<T> implements appDependenciesError<T> {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initial<T> value) initial,
-    required TResult Function(appDependenciesLoading<T> value)
+    required TResult Function(_Initial value) initial,
+    required TResult Function(appDependenciesLoading value)
         appDependenciesLoading,
-    required TResult Function(appDependenciesSuccess<T> value)
+    required TResult Function(appDependenciesSuccess value)
         appDependenciesSuccess,
-    required TResult Function(appDependenciesError<T> value)
-        appDependenciesError,
+    required TResult Function(appDependenciesError value) appDependenciesError,
   }) {
     return appDependenciesError(this);
   }
@@ -601,10 +611,10 @@ class _$appDependenciesErrorImpl<T> implements appDependenciesError<T> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial<T> value)? initial,
-    TResult? Function(appDependenciesLoading<T> value)? appDependenciesLoading,
-    TResult? Function(appDependenciesSuccess<T> value)? appDependenciesSuccess,
-    TResult? Function(appDependenciesError<T> value)? appDependenciesError,
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(appDependenciesLoading value)? appDependenciesLoading,
+    TResult? Function(appDependenciesSuccess value)? appDependenciesSuccess,
+    TResult? Function(appDependenciesError value)? appDependenciesError,
   }) {
     return appDependenciesError?.call(this);
   }
@@ -612,10 +622,10 @@ class _$appDependenciesErrorImpl<T> implements appDependenciesError<T> {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial<T> value)? initial,
-    TResult Function(appDependenciesLoading<T> value)? appDependenciesLoading,
-    TResult Function(appDependenciesSuccess<T> value)? appDependenciesSuccess,
-    TResult Function(appDependenciesError<T> value)? appDependenciesError,
+    TResult Function(_Initial value)? initial,
+    TResult Function(appDependenciesLoading value)? appDependenciesLoading,
+    TResult Function(appDependenciesSuccess value)? appDependenciesSuccess,
+    TResult Function(appDependenciesError value)? appDependenciesError,
     required TResult orElse(),
   }) {
     if (appDependenciesError != null) {
@@ -625,12 +635,12 @@ class _$appDependenciesErrorImpl<T> implements appDependenciesError<T> {
   }
 }
 
-abstract class appDependenciesError<T> implements AppDependenciesState<T> {
+abstract class appDependenciesError implements AppDependenciesState {
   const factory appDependenciesError({required final String error}) =
-      _$appDependenciesErrorImpl<T>;
+      _$appDependenciesErrorImpl;
 
   String get error;
   @JsonKey(ignore: true)
-  _$$appDependenciesErrorImplCopyWith<T, _$appDependenciesErrorImpl<T>>
+  _$$appDependenciesErrorImplCopyWith<_$appDependenciesErrorImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
