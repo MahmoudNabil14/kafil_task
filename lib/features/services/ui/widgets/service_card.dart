@@ -22,12 +22,12 @@ class ServiceCard extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10.r),
           color: Colors.white,
-          boxShadow: const [
+          boxShadow: [
             BoxShadow(
-              color: ColorsManager.shadowColor,
-              spreadRadius: -6,
-              blurRadius: 5,
-              offset: Offset(0, 2), // changes position of shadow
+              color: ColorsManager.shadowColor.withOpacity(0.1),
+              spreadRadius: 0,
+              blurRadius: 2,
+              offset: const Offset(0, 1), // changes position of shadow
             ),
           ],
         ),
@@ -43,10 +43,11 @@ class ServiceCard extends StatelessWidget {
                     children: [
                       Container(
                         height: double.infinity,
-                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(10.r), color: Colors.red),
+                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(10.r), color: ColorsManager.lighterGray),
                         clipBehavior: Clip.antiAliasWithSaveLayer,
                         child: CachedNetworkImage(
                           imageUrl: mainImage,
+                          errorWidget: (context, url, error) => const Icon(Icons.error, color: Colors.red),
                           fit: BoxFit.cover,
                         ),
                       ),

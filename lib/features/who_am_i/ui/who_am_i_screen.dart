@@ -6,6 +6,7 @@ import 'package:kafil_task/core/app_dependecies/logic/app_dependencies_state.dar
 import 'package:kafil_task/core/di/dependency_injection.dart';
 import 'package:kafil_task/core/helpers/spacing.dart';
 import 'package:kafil_task/core/shared_widgets/app_text_form_field.dart';
+import 'package:kafil_task/core/theming/colors.dart';
 import 'package:kafil_task/core/theming/text_styles.dart';
 import 'package:kafil_task/features/who_am_i/data/models/who_am_i_response.dart';
 import 'package:kafil_task/features/who_am_i/logic/who_am_i_cubit.dart';
@@ -45,7 +46,7 @@ class WhoAmIScreen extends StatelessWidget {
               child: BlocBuilder<WhoAmICubit, WhoAmIState>(
                 builder: (context, state) {
                   return state.when(loading: () {
-                    return const CircularProgressIndicator();
+                    return const CircularProgressIndicator(color: ColorsManager.mainGreen,);
                   }, success: (whoAmIResponse) {
                     WhoAmIResponse userData = whoAmIResponse as WhoAmIResponse;
                     return Expanded(
@@ -77,7 +78,7 @@ class WhoAmIScreen extends StatelessWidget {
                             AppTextFormField(
                                 initialText: userData.userData.salary.toString(), labelText: "Salary", readOnly: true, validator: (value) {}),
                             verticalSpace(15),
-                            const BirthdateField(),
+                            BirthdateField(birthDate: userData.userData.birthDate!,),
                             verticalSpace(15),
                             GenderRadioButtons(
                               selectedGenderCode: userData.userData.gender!,

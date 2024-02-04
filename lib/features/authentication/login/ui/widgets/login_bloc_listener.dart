@@ -4,6 +4,8 @@ import 'package:kafil_task/core/helpers/constants.dart';
 import 'package:kafil_task/core/helpers/extensions.dart';
 import 'package:kafil_task/core/helpers/secure_cache_service.dart';
 import 'package:kafil_task/core/routing/routes.dart';
+import 'package:kafil_task/core/shared_widgets/api_error_widget.dart';
+import 'package:kafil_task/core/shared_widgets/api_loading_widget.dart';
 import 'package:kafil_task/core/theming/colors.dart';
 import 'package:kafil_task/core/theming/text_styles.dart';
 import 'package:kafil_task/features/authentication/login/data/models/login_response.dart';
@@ -17,55 +19,19 @@ class LoginBlocListener extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<LoginCubit, LoginState>(
       listener: (context, state) {
-        print("hell");
         state.whenOrNull(loading: () {
-          showDialog(
-            context: context,
-            builder: (context) => const Center(
-              child: CircularProgressIndicator(
-                color: ColorsManager.mainGreen,
-              ),
-            ),
-          );
+          showApiLoadingDialog(context: context);
+
         }, success: (loginResponse) {
           userAccessToken = (loginResponse as LoginResponse).accessToken;
           SecureCacheService.saveData(key: "userAccessToken", value: userAccessToken);
           context.pop();
           context.pushNamedAndRemoveUntil(Routes.appLayout, predicate: (Route<dynamic> route) { return false; });
         }, error: (error) {
-          setupErrorState(context, error);
+          showApiErrorDialog(context: context, error: error);
         });
       },
       child: const SizedBox.shrink(),
-    );
-  }
-
-  void setupErrorState(BuildContext context, String error) {
-    context.pop();
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        icon: const Icon(
-          Icons.error,
-          color: Colors.red,
-          size: 32,
-        ),
-        content: Text(
-          error,
-          style: TextStyles.font14MainGreenW600,
-        ),
-        actions: [
-          TextButton(
-            onPressed: () {
-              context.pop();
-            },
-            child: Text(
-              'OK',
-              style: TextStyles.font15BlackW500,
-            ),
-          ),
-        ],
-      ),
     );
   }
 }

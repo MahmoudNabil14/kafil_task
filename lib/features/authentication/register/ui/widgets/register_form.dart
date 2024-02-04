@@ -136,7 +136,6 @@ class UserTypesDropDown extends StatelessWidget {
                     },
                     labelText: "User Type",
                     suffixIcon: PopupMenuButton<int>(
-
                       color: ColorsManager.lightestGray,
                       icon: Icon(
                         Icons.keyboard_arrow_down_outlined,
@@ -145,8 +144,10 @@ class UserTypesDropDown extends StatelessWidget {
                       ),
                       onSelected: (int type) {
                         setState(() {
-                          context.read<RegisterCubit>().userTypeController.text = appDependencies.userData.userTypes.singleWhere((element) => element.value==type).label;
-                          context.read<RegisterCubit>().selectedType = appDependencies.userData.userTypes.singleWhere((element) => element.value==type).value;
+                          context.read<RegisterCubit>().userTypeController.text =
+                              appDependencies.userData.userTypes.singleWhere((element) => element.value == type).label;
+                          context.read<RegisterCubit>().selectedType =
+                              appDependencies.userData.userTypes.singleWhere((element) => element.value == type).value;
                         });
                       },
                       itemBuilder: (BuildContext context) => appDependencies.userData.userTypes.map((userType) {

@@ -11,18 +11,22 @@ import 'package:kafil_task/kafil_app.dart';
 
 void main() async {
   await ScreenUtil.ensureScreenSize();
-  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-    statusBarBrightness: Brightness.light,
-    statusBarIconBrightness: Brightness.dark,
-    statusBarColor: Colors.transparent,
-  ));
+  // SystemChrome.setSystemUIOverlayStyle(
+  // const SystemUiOverlayStyle(
+  //   statusBarBrightness: Brightness.light,
+  //   statusBarIconBrightness: Brightness.dark,
+  //   statusBarColor: Colors.transparent,
+  // ),
+  // );
   await SecureCacheService.init();
   userAccessToken = await SecureCacheService.getData(
     key: "userAccessToken",
   );
   setupGetIt();
   Bloc.observer = AppBlocObserver();
-  runApp(KafilApp(
-    appRouter: AppRouter(),
-  ));
+  runApp(
+    KafilApp(
+      appRouter: AppRouter(),
+    ),
+  );
 }

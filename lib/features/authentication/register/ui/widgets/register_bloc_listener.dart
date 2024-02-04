@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:kafil_task/core/app_dependecies/logic/app_dependencies_cubit.dart';
-import 'package:kafil_task/core/app_dependecies/logic/app_dependencies_state.dart';
 import 'package:kafil_task/core/helpers/extensions.dart';
 import 'package:kafil_task/core/routing/routes.dart';
 import 'package:kafil_task/core/theming/colors.dart';
@@ -26,7 +24,8 @@ class RegisterBlocListener extends StatelessWidget {
             ),
           );
         }, success: (registerResponse) {
-          context.pushNamedAndRemoveUntil(Routes.loginScreen, predicate: (Route<dynamic> route)=>false);
+          context.pop();
+          showSuccessDialog(context);
           // context.pop();
         }, error: (error) {
           setupErrorState(context, error);
@@ -62,6 +61,38 @@ class RegisterBlocListener extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  void showSuccessDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Registered Successful'),
+          content: const SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text('Congratulations, you have registered successfully!'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              style: TextButton.styleFrom(
+                foregroundColor: Colors.white,
+                backgroundColor: ColorsManager.mainGreen,
+                disabledForegroundColor: Colors.grey.withOpacity(0.38),
+              ),
+              onPressed: () {
+                context.pushNamedAndRemoveUntil(Routes.loginScreen, predicate: (Route<dynamic> route) => false);
+              },
+              child: const Text('Continue'),
+            ),
+          ],
+        );
+      },
     );
   }
 }

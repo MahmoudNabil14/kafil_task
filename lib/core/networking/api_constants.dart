@@ -7,6 +7,7 @@ class ApiConstants {
   static const String whoAmI = "api/test/user/who-am-i";
   static const String services = "api/test/service";
   static const String popularServices = "api/test/service/popular";
+  static const String countries = "api/test/country";
 }
 
 class ApiErrors {
